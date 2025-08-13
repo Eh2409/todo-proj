@@ -1,4 +1,4 @@
-import { storageService } from "./async-storage.service.js"
+import { storageService } from "../async-storage.service.js"
 
 
 export const userService = {
@@ -7,8 +7,7 @@ export const userService = {
     logout,
     signup,
     getById,
-    query,
-    getEmptyCredentials
+    query
 }
 const STORAGE_KEY_LOGGEDIN = 'user'
 const STORAGE_KEY = 'userDB'
@@ -53,13 +52,6 @@ function _setLoggedinUser(user) {
     return userToSave
 }
 
-function getEmptyCredentials() {
-    return {
-        fullname: '',
-        username: 'muki',
-        password: 'muki1',
-    }
-}
 
 // signup({username: 'muki', password: 'muki1', fullname: 'Muki Ja'})
 // login({username: 'muki', password: 'muki1'})

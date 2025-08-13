@@ -1,4 +1,4 @@
-import { todoService } from "../services/todo.service.js"
+import { todoService } from "../services/todo/todo.index.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 import { TodoFilter } from "../cmps/todo/TodoFilter.jsx"

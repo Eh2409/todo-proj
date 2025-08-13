@@ -1,5 +1,5 @@
-import { utilService } from './util.service.js'
-import { storageService } from './async-storage.service.js'
+import { utilService } from '../util.service.js'
+import { storageService } from '../async-storage.service.js'
 
 const TODO_KEY = 'todoDB'
 _createTodos()
@@ -9,9 +9,6 @@ export const todoService = {
     get,
     remove,
     save,
-    getEmptyTodo,
-    getDefaultFilter,
-    getFilterFromSearchParams,
     getImportanceStats,
 }
 // For Debug (easy access from console):
@@ -56,24 +53,6 @@ function save(todo) {
         return storageService.post(TODO_KEY, todo)
     }
 }
-
-function getEmptyTodo(txt = '', importance = 5) {
-    return { txt, importance, isDone: false }
-}
-
-function getDefaultFilter() {
-    return { txt: '', importance: 0 }
-}
-
-function getFilterFromSearchParams(searchParams) {
-    const defaultFilter = getDefaultFilter()
-    const filterBy = {}
-    for (const field in defaultFilter) {
-        filterBy[field] = searchParams.get(field) || ''
-    }
-    return filterBy
-}
-
 
 function getImportanceStats() {
     return storageService.query(TODO_KEY)

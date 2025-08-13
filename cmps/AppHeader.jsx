@@ -2,10 +2,11 @@ const { useState } = React
 const { Link, NavLink } = ReactRouterDOM
 const { useNavigate } = ReactRouter
 
-import { userService } from '../services/user.service.js'
+
 import { UserMsg } from "./UserMsg.jsx"
 import { LoginSignup } from './user/LoginSignup.jsx'
 import { showErrorMsg } from '../services/event-bus.service.js'
+import { userService } from "../services/user/user.index.js"
 
 
 export function AppHeader() {
