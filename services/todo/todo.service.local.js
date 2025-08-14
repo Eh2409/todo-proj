@@ -9,6 +9,7 @@ export const todoService = {
     get,
     remove,
     save,
+    getDoneTodosPercentage,
     getImportanceStats,
 }
 // For Debug (easy access from console):
@@ -59,6 +60,16 @@ function save(todo) {
         return storageService.post(TODO_KEY, todo)
     }
 }
+
+function getDoneTodosPercentage() {
+    return storageService.query(TODO_KEY)
+        .then(todos => {
+            const doneTodosNum = todos.filter(t => t.isDone === true).length
+            const doneTodosPercentage = Math.ceil((doneTodosNum / todos.length) * 100)
+            return doneTodosPercentage
+        })
+}
+
 
 function getImportanceStats() {
     return storageService.query(TODO_KEY)

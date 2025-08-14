@@ -4,8 +4,11 @@ export const ADD_TODO = 'ADD_TODO'
 export const UPDATE_TODO = 'UPDATE_TODO'
 export const REMOVE_TODO = 'REMOVE_TODO'
 
+export const SET_DONE_PERCENTAGE = 'SET_DONE_PERCENTAGE'
+
 const initialState = {
     todos: [],
+    doneTodosPercentage: 0
 }
 
 export function todoReducer(state = initialState, cmd) {
@@ -27,6 +30,9 @@ export function todoReducer(state = initialState, cmd) {
                 ...state,
                 todos: state.todos.filter(t => t._id !== cmd.todoId)
             }
+
+        case SET_DONE_PERCENTAGE:
+            return { ...state, doneTodosPercentage: cmd.doneTodosPercentage }
 
         default: return state
     }

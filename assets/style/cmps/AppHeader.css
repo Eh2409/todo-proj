@@ -1,7 +1,38 @@
 .app-header {
     background-color: var(--clr1);
     color: var(--clr2bg-light);
-    
+
+    .progress-bar {
+        position: relative;
+        padding-block: 0.2em;
+        min-height: 1.3em;
+        background-color: black;
+        text-align: center;
+
+        .percentage {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+        }
+
+        .done-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            background-color: rgb(0, 51, 255);
+            height: 100%;
+
+            background-image: url("/assets/img/bar\ image.svg");
+            background-size: cover;
+            background-attachment: local;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            transition: width 1s ease-in-out;
+        }
+    }
+
 }
 
 .header-container {

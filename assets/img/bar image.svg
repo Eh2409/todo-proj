@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="200">
+  <defs>
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3c72"></stop>
+      <stop offset="25%" style="stop-color:#2a5298"></stop>
+      <stop offset="50%" style="stop-color:#4facfe"></stop>
+      <stop offset="75%" style="stop-color:#00c6ff"></stop>
+      <stop offset="100%" style="stop-color:#74b9ff"></stop>
+    </linearGradient>
+    <path id="wave1" d="M0,120 Q125,100 250,120 T500,120 T750,120 T1000,120" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none"></path>
+    <path id="wave2" d="M0,140 Q187,160 375,140 T750,140 T1000,140" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" fill="none"></path>
+    <circle id="particle1" cx="125" cy="60" r="3" fill="rgba(255,255,255,0.4)"></circle>
+    <circle id="particle2" cx="312" cy="80" r="2" fill="rgba(255,255,255,0.5)"></circle>
+    <circle id="particle3" cx="500" cy="50" r="2.5" fill="rgba(255,255,255,0.3)"></circle>
+    <circle id="particle4" cx="687" cy="90" r="2" fill="rgba(255,255,255,0.6)"></circle>
+    <circle id="particle5" cx="875" cy="65" r="3" fill="rgba(255,255,255,0.4)"></circle>
+    <polygon id="triangle1" points="187,30 200,50 174,50" fill="rgba(255,255,255,0.15)">
+      <animateTransform attributeName="transform" type="rotate" values="0 187 40;360 187 40" dur="12s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <polygon id="triangle2" points="562,160 575,180 549,180" fill="rgba(255,255,255,0.1)">
+      <animateTransform attributeName="transform" type="rotate" values="0 562 170;-360 562 170" dur="15s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <polygon id="triangle3" points="820,35 830,55 810,55" fill="rgba(255,255,255,0.13)">
+      <animateTransform attributeName="transform" type="rotate" values="0 820 45;360 820 45" dur="10s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <polygon id="triangle4" points="280,165 290,185 270,185" fill="rgba(255,255,255,0.12)">
+      <animateTransform attributeName="transform" type="rotate" values="0 280 175;-360 280 175" dur="13s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <rect id="square1" x="401" y="26" width="8" height="8" fill="rgba(255,255,255,0.2)">
+      <animateTransform attributeName="transform" type="rotate" values="0 405 30;360 405 30" dur="8s" repeatCount="indefinite"></animateTransform>
+    </rect>
+    <rect id="square2" x="774" y="140" width="6" height="6" fill="rgba(255,255,255,0.15)">
+      <animateTransform attributeName="transform" type="rotate" values="0 777 143;-360 777 143" dur="10s" repeatCount="indefinite"></animateTransform>
+    </rect>
+    <rect id="square3" x="150" y="70" width="7" height="7" fill="rgba(255,255,255,0.17)">
+      <animateTransform attributeName="transform" type="rotate" values="0 153 73;360 153 73" dur="9s" repeatCount="indefinite"></animateTransform>
+    </rect>
+    <rect id="square4" x="920" y="90" width="5" height="5" fill="rgba(255,255,255,0.14)">
+      <animateTransform attributeName="transform" type="rotate" values="0 922 92;-360 922 92" dur="11s" repeatCount="indefinite"></animateTransform>
+    </rect>
+    <polygon id="hexagon1" points="350,80 360,75 370,80 370,90 360,95 350,90" fill="rgba(255,255,255,0.18)">
+      <animateTransform attributeName="transform" type="rotate" values="0 360 85;360 360 85" dur="14s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <polygon id="hexagon2" points="750,50 760,45 770,50 770,60 760,65 750,60" fill="rgba(255,255,255,0.12)">
+      <animateTransform attributeName="transform" type="rotate" values="0 760 55;-360 760 55" dur="16s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <polygon id="hexagon3" points="550,25 558,21 566,25 566,33 558,37 550,33" fill="rgba(255,255,255,0.16)">
+      <animateTransform attributeName="transform" type="rotate" values="0 558 29;360 558 29" dur="12s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <rect id="diamond1" x="96" y="117" width="12" height="12" fill="rgba(255,255,255,0.16)" transform="rotate(45 102 123)">
+      <animateTransform attributeName="transform" type="rotate" values="45 102 123;405 102 123" dur="9s" repeatCount="indefinite"></animateTransform>
+    </rect>
+    <rect id="diamond2" x="646" y="87" width="10" height="10" fill="rgba(255,255,255,0.14)" transform="rotate(45 651 92)">
+      <animateTransform attributeName="transform" type="rotate" values="45 651 92;-315 651 92" dur="11s" repeatCount="indefinite"></animateTransform>
+    </rect>
+    <rect id="diamond3" x="430" y="150" width="8" height="8" fill="rgba(255,255,255,0.13)" transform="rotate(45 434 154)">
+      <animateTransform attributeName="transform" type="rotate" values="45 434 154;405 434 154" dur="7s" repeatCount="indefinite"></animateTransform>
+    </rect>
+    <polygon id="pentagon1" points="220,40 228,35 238,40 235,50 223,50" fill="rgba(255,255,255,0.15)">
+      <animateTransform attributeName="transform" type="rotate" values="0 229 42;360 229 42" dur="13s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <polygon id="pentagon2" points="870,130 878,125 888,130 885,140 873,140" fill="rgba(255,255,255,0.11)">
+      <animateTransform attributeName="transform" type="rotate" values="0 879 132;-360 879 132" dur="15s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <polygon id="octagon1" points="600,110 605,107 610,110 613,115 610,120 605,123 600,120 597,115" fill="rgba(255,255,255,0.14)">
+      <animateTransform attributeName="transform" type="rotate" values="0 605 115;360 605 115" dur="18s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <polygon id="star1" points="50,60 55,70 65,70 58,77 60,87 50,82 40,87 42,77 35,70 45,70" fill="rgba(255,255,255,0.12)">
+      <animateTransform attributeName="transform" type="rotate" values="0 50 73;360 50 73" dur="20s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <polygon id="star2" points="700,170 705,175 715,175 710,180 712,190 700,185 688,190 690,180 685,175 695,175" fill="rgba(255,255,255,0.10)">
+      <animateTransform attributeName="transform" type="rotate" values="0 700 182;-360 700 182" dur="22s" repeatCount="indefinite"></animateTransform>
+    </polygon>
+    <circle id="orb1" cx="93" cy="150" r="12" fill="rgba(255,255,255,0.1)" opacity="0.8"></circle>
+    <circle id="orb2" cx="468" cy="170" r="15" fill="rgba(255,255,255,0.08)" opacity="0.6"></circle>
+    <circle id="orb3" cx="843" cy="155" r="10" fill="rgba(255,255,255,0.12)" opacity="0.7"></circle>
+  </defs>
+  <rect width="1000" height="200" fill="url(#mainGradient)"></rect>
+  <use href="#wave1"></use>
+  <use href="#wave2"></use>
+  <use href="#particle1"></use>
+  <use href="#particle2"></use>
+  <use href="#particle3"></use>
+  <use href="#particle4"></use>
+  <use href="#particle5"></use>
+  <use href="#triangle1"></use>
+  <use href="#triangle2"></use>
+  <use href="#triangle3"></use>
+  <use href="#triangle4"></use>
+  <use href="#square1"></use>
+  <use href="#square2"></use>
+  <use href="#square3"></use>
+  <use href="#square4"></use>
+  <use href="#hexagon1"></use>
+  <use href="#hexagon2"></use>
+  <use href="#hexagon3"></use>
+  <use href="#diamond1"></use>
+  <use href="#diamond2"></use>
+  <use href="#diamond3"></use>
+  <use href="#pentagon1"></use>
+  <use href="#pentagon2"></use>
+  <use href="#octagon1"></use>
+  <use href="#star1"></use>
+  <use href="#star2"></use>
+  <use href="#orb1"></use>
+  <use href="#orb2"></use>
+  <use href="#orb3"></use>
+</svg>
