@@ -1,4 +1,7 @@
+const { useSelector } = ReactRedux
+
 import { todoService } from "../services/todo/todo.index.js"
+import { todoActions } from "../stroe/actions/todo.actions.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 import { TodoFilter } from "../cmps/todo/TodoFilter.jsx"
@@ -10,7 +13,7 @@ const { Link, useSearchParams } = ReactRouterDOM
 
 export function TodoIndex() {
 
-    const [todos, setTodos] = useState(null)
+    const todos = useSelector(storeState => storeState.todoModule.todos)
 
     // Special hook for accessing search-params:
     const [searchParams, setSearchParams] = useSearchParams()
@@ -21,18 +24,21 @@ export function TodoIndex() {
 
     useEffect(() => {
         setSearchParams(filterBy)
-        todoService.query(filterBy)
-            .then(todos => setTodos(todos))
-            .catch(err => {
-                console.eror('err:', err)
-                showErrorMsg('Cannot load todos')
-            })
+        loadTodos(filterBy)
     }, [filterBy])
 
+
+    function loadTodos(filterBy) {
+        todoActions.loadTodos(filterBy)
+            .catch(err => {
+                console.error('err:', err)
+                showErrorMsg('Cannot load todos')
+            })
+    }
+
     function onRemoveTodo(todoId) {
-        todoService.remove(todoId)
+        todoActions.remove(todoId)
             .then(() => {
-                setTodos(prevTodos => prevTodos.filter(todo => todo._id !== todoId))
                 showSuccessMsg(`Todo removed`)
             })
             .catch(err => {
@@ -42,15 +48,16 @@ export function TodoIndex() {
     }
 
     function onToggleTodo(todo) {
+
         const todoToSave = { ...todo, isDone: !todo.isDone }
-        todoService.save(todoToSave)
-            .then((savedTodo) => {
-                setTodos(prevTodos => prevTodos.map(currTodo => (currTodo._id !== todo._id) ? currTodo : { ...savedTodo }))
-                showSuccessMsg(`Todo is ${(savedTodo.isDone) ? 'done' : 'back on your list'}`)
+
+        todoActions.save(todoToSave)
+            .then(() => {
+                showSuccessMsg(`Todo is ${(todoToSave.isDone) ? 'done' : 'back on your list'}`)
             })
             .catch(err => {
                 console.log('err:', err)
-                showErrorMsg('Cannot toggle todo ' + todoId)
+                showErrorMsg('Cannot toggle todo ' + todo._id)
             })
     }
 

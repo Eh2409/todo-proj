@@ -1,4 +1,5 @@
 import { todoService } from "../services/todo/todo.index.js"
+import { todoActions } from "../stroe/actions/todo.actions.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 const { useState, useEffect } = React
@@ -43,10 +44,10 @@ export function TodoEdit() {
 
     function onSaveTodo(ev) {
         ev.preventDefault()
-        todoService.save(todoToEdit)
-            .then((savedTodo) => {
+        todoActions.save(todoToEdit)
+            .then(savedTodoId => {
                 navigate('/todo')
-                showSuccessMsg(`Todo Saved (id: ${savedTodo._id})`)
+                showSuccessMsg(`Todo Saved (id: ${savedTodoId})`)
             })
             .catch(err => {
                 showErrorMsg('Cannot save todo')
