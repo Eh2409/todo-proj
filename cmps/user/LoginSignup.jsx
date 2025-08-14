@@ -1,10 +1,11 @@
 import { userService } from '../../services/user/user.index.js'
 import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service.js'
+import { userActions } from '../../stroe/actions/user.actions.js'
 
 
 const { useState } = React
 
-export function LoginSignup({ onSetUser }) {
+export function LoginSignup() {
 
     const [isSignup, setIsSignUp] = useState(false)
     const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
@@ -25,15 +26,13 @@ export function LoginSignup({ onSetUser }) {
     }
 
     function login(credentials) {
-        userService.login(credentials)
-            .then(onSetUser)
+        userActions.login(credentials)
             .then(() => { showSuccessMsg('Logged in successfully') })
             .catch((err) => { showErrorMsg('Oops try again') })
     }
 
     function signup(credentials) {
-        userService.signup(credentials)
-            .then(onSetUser)
+        userActions.signup(credentials)
             .then(() => { showSuccessMsg('Signed in successfully') })
             .catch((err) => { showErrorMsg('Oops try again') })
     }
