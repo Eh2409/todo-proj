@@ -2,7 +2,7 @@ import { todoService } from "../services/todo/todo.index.js"
 import { todoActions } from "../stroe/actions/todo.actions.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
-const { useState, useEffect } = React
+const { useState, useEffect, Fragment } = React
 const { useNavigate, useParams } = ReactRouterDOM
 
 export function TodoEdit() {
@@ -39,6 +39,10 @@ export function TodoEdit() {
                 break
         }
 
+        if (field === 'color' && target.type === 'checkbox') {
+            value = value ? "#000000" : undefined
+        }
+
         setTodoToEdit(prevTodoToEdit => ({ ...prevTodoToEdit, [field]: value }))
     }
 
@@ -55,7 +59,7 @@ export function TodoEdit() {
             })
     }
 
-    const { txt, importance, isDone } = todoToEdit
+    const { txt, importance, isDone, color } = todoToEdit
 
     return (
         <section className="todo-edit">
@@ -69,6 +73,13 @@ export function TodoEdit() {
                 <label htmlFor="isDone">isDone:</label>
                 <input onChange={handleChange} value={isDone} type="checkbox" name="isDone" id="isDone" />
 
+                <label htmlFor="color">use color:</label>
+                <input onChange={handleChange} type="checkbox" value={!!color} checked={!!color} name="color" id="color" />
+
+                {color && <Fragment>
+                    <label htmlFor="color">color:</label>
+                    <input onChange={handleChange} value={color} type="color" name="color" id="color" />
+                </Fragment>}
 
                 <button>Save</button>
             </form>

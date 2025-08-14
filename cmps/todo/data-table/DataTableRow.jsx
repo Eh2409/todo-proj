@@ -6,7 +6,7 @@ export function DataTableRow({ todo, onRemoveTodo }) {
     const [isExpanded, setIsExpanded] = useState(false)
 
     return <Fragment>
-        <tr>
+        <tr style={{ backgroundColor: todo.color }}>
             <td className="toggle-expand" onClick={() => {
                 setIsExpanded(!isExpanded)
             }}>
