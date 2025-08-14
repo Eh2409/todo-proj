@@ -1,14 +1,24 @@
 import { userService } from '../../services/user/user.index.js'
-import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service.js'
-import { userActions } from '../../stroe/actions/user.actions.js'
 
+const { useState, useEffect } = React
 
-const { useState } = React
+export function LoginSignup({ isPopupOpen, signup, login, toggleIsSignup, isSignup }) {
 
-export function LoginSignup() {
-
-    const [isSignup, setIsSignUp] = useState(false)
     const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
+
+    useEffect(() => {
+        if (!isPopupOpen) {
+
+            if (isSignup) {
+                setTimeout(() => {
+                    toggleIsSignup()
+                }, 200)
+            }
+
+            setCredentials(userService.getEmptyCredentials())
+        }
+    }, [isPopupOpen])
+
 
     function handleChange({ target }) {
         const { name: field, value } = target
@@ -20,25 +30,11 @@ export function LoginSignup() {
         onLogin(credentials)
     }
 
-
     function onLogin(credentials) {
         isSignup ? signup(credentials) : login(credentials)
     }
-
-    function login(credentials) {
-        userActions.login(credentials)
-            .then(() => { showSuccessMsg('Logged in successfully') })
-            .catch((err) => { showErrorMsg('Oops try again') })
-    }
-
-    function signup(credentials) {
-        userActions.signup(credentials)
-            .then(() => { showSuccessMsg('Signed in successfully') })
-            .catch((err) => { showErrorMsg('Oops try again') })
-    }
-
     return (
-        <div className="login-page">
+        <div className="login-signup">
             <form className="login-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -70,7 +66,7 @@ export function LoginSignup() {
             </form>
 
             <div className="btns">
-                <a href="#" onClick={() => setIsSignUp(!isSignup)}>
+                <a href="#" onClick={toggleIsSignup}>
                     {isSignup ?
                         'Already a member? Login' :
                         'New user? Signup here'

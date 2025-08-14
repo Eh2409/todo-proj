@@ -8,6 +8,7 @@
     font-weight: bold;
     border: 3px solid black;
     border-radius: 2px;
+    z-index: 20;
 }
 
 .user-msg.success {
@@ -19,7 +20,7 @@
 }
 
 
-.user-msg button{
+.user-msg button {
     float: right;
     margin: 1em;
 }

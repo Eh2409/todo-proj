@@ -6,9 +6,10 @@ const { useSelector } = ReactRedux
 
 import { UserMsg } from "./UserMsg.jsx"
 import { LoginSignup } from './user/LoginSignup.jsx'
-import { showErrorMsg } from '../services/event-bus.service.js'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { userActions } from "../stroe/actions/user.actions.js"
 import { todoActions } from "../stroe/actions/todo.actions.js"
+import { Popup } from "./Popup.jsx"
 
 
 export function AppHeader() {
@@ -18,6 +19,9 @@ export function AppHeader() {
 
     const [currPercentage, setCurrPercentage] = useState(0)
     const percentageRef = useRef()
+
+    const [isPopupOpen, setIsPopupOpen] = useState(false)
+    const [isSignup, setIsSignUp] = useState(false)
 
     useEffect(() => {
         onLoadDoneTodosPercentage()
@@ -53,6 +57,29 @@ export function AppHeader() {
             })
     }
 
+
+    function login(credentials) {
+        userActions.login(credentials)
+            .then(() => {
+                showSuccessMsg('Logged in successfully')
+                toggleIsPopupOpen()
+            })
+            .catch((err) => {
+                console.log(err);
+                showErrorMsg('Oops try again')
+            })
+    }
+
+    function signup(credentials) {
+        userActions.signup(credentials)
+            .then(() => {
+                showSuccessMsg('Signed in successfully')
+                toggleIsPopupOpen()
+            })
+            .catch((err) => { showErrorMsg('Oops try again') })
+    }
+
+
     function onLogout() {
         userActions.logout()
             .then(() => {
@@ -63,22 +90,19 @@ export function AppHeader() {
             })
     }
 
+    function toggleIsSignup() {
+        setIsSignUp(!isSignup)
+    }
+
+    function toggleIsPopupOpen() {
+        setIsPopupOpen(!isPopupOpen)
+    }
 
     return (
         <header className="app-header full main-layout">
             <section className="header-container">
                 <h1>React Todo App</h1>
 
-                {loggedinUser ? (
-                    < section >
-                        <Link to={`/user/${loggedinUser._id}`}>Hello {loggedinUser.fullname}</Link>
-                        <button onClick={onLogout}>Logout</button>
-                    </ section >
-                ) : (
-                    <section>
-                        <LoginSignup />
-                    </section>
-                )}
 
                 <nav className="app-nav">
                     <NavLink to="/" >Home</NavLink>
@@ -86,6 +110,34 @@ export function AppHeader() {
                     <NavLink to="/todo" >Todos</NavLink>
                     <NavLink to="/dashboard" >Dashboard</NavLink>
                 </nav>
+
+                {loggedinUser ? (
+                    < section >
+                        <Link to={`/user/${loggedinUser._id}`}>{loggedinUser.fullname}</Link>
+                        <button onClick={onLogout}>Logout</button>
+                    </ section >
+                ) : (
+                    <section>
+                        <button onClick={toggleIsPopupOpen}>Login / Signup</button>
+                    </section>
+                )}
+
+
+                <Popup
+                    header={<h2>{isSignup ? "Signup" : "Login"}</h2>}
+                    toggleIsPopupOpen={toggleIsPopupOpen}
+                    isPopupOpen={isPopupOpen}>
+
+                    <LoginSignup
+                        isPopupOpen={isPopupOpen}
+                        signup={signup}
+                        login={login}
+                        toggleIsSignup={toggleIsSignup}
+                        isSignup={isSignup}
+                    />
+
+                </Popup>
+
 
             </section>
             <UserMsg />
@@ -95,6 +147,6 @@ export function AppHeader() {
                 <div className="done-bar" style={{ width: doneTodosPercentage + "%" }}></div>
             </div>
 
-        </header>
+        </header >
     )
 }

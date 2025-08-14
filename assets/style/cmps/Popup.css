@@ -1,0 +1,49 @@
+.popup-black-wrapper {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.277);
+    cursor: pointer;
+    backdrop-filter: blur(0px);
+    z-index: 5;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+
+    &.open {
+        opacity: 1;
+        pointer-events: visible;
+        backdrop-filter: blur(2px);
+
+        .popup {
+            scale: 1;
+        }
+    }
+
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        padding: 0.5em;
+
+        background-color: var(--clr1bg);
+        min-width: 30vw;
+
+        cursor: auto;
+        border-radius: 0.6em;
+
+        scale: 0.8;
+        transition: 200ms ease-in-out;
+
+        &>* {
+            padding: 0.5em;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+}
