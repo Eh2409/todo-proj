@@ -26,6 +26,12 @@ function query(filterBy = {}) {
                 todos = todos.filter(todo => todo.importance >= filterBy.importance)
             }
 
+            if (filterBy.isDone !== undefined) {
+                console.log('pepekaka:')
+                console.log(typeof filterBy.isDone)
+                todos = todos.filter(todo => todo.isDone === filterBy.isDone)
+            }
+
             return todos
         })
 }

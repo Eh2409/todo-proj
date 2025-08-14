@@ -1,3 +1,4 @@
+import { utilService } from "../util.service.js"
 
 import { todoService as local } from "./todo.service.local.js"
 
@@ -8,14 +9,19 @@ function getEmptyTodo(txt = '', importance = 5) {
 }
 
 function getDefaultFilter() {
-    return { txt: '', importance: 0 }
+    return { txt: '', importance: 0, isDone: undefined }
 }
 
 function getFilterFromSearchParams(searchParams) {
     const defaultFilter = getDefaultFilter()
     const filterBy = {}
+
     for (const field in defaultFilter) {
-        filterBy[field] = searchParams.get(field) || ''
+        if (field === 'isDone') {
+            filterBy[field] = utilService.parseIsDone(searchParams.get(field))
+        } else {
+            filterBy[field] = searchParams.get(field) || ''
+        }
     }
     return filterBy
 }

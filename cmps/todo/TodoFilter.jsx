@@ -2,7 +2,7 @@ const { useState, useEffect } = React
 
 export function TodoFilter({ filterBy, onSetFilterBy }) {
 
-    const [filterByToEdit, setFilterByToEdit] = useState({...filterBy})
+    const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
     useEffect(() => {
         // Notify parent
@@ -12,6 +12,8 @@ export function TodoFilter({ filterBy, onSetFilterBy }) {
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
+
+        console.log('Here:', target.type)
 
         switch (target.type) {
             case 'number':
@@ -26,6 +28,22 @@ export function TodoFilter({ filterBy, onSetFilterBy }) {
             default: break
         }
 
+        if (target.type === 'select-one') {
+            switch (value) {
+                case 'undefined':
+                    value = undefined
+                    break;
+                case 'false':
+                    value = false
+                    break;
+                case 'true':
+                    value = true
+                    break;
+
+                default: break;
+            }
+        }
+
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
@@ -35,7 +53,7 @@ export function TodoFilter({ filterBy, onSetFilterBy }) {
         onSetFilterBy(filterByToEdit)
     }
 
-    const { txt, importance } = filterByToEdit
+    const { txt, importance, isDone } = filterByToEdit
     return (
         <section className="todo-filter">
             <h2>Filter Todos</h2>
@@ -47,6 +65,13 @@ export function TodoFilter({ filterBy, onSetFilterBy }) {
                 <input value={importance} onChange={handleChange}
                     type="number" placeholder="By Importance" id="importance" name="importance"
                 />
+
+                <label htmlFor="isDone">todo status: </label>
+                <select name="isDone" id="isDone" value={isDone} onChange={handleChange}>
+                    <option value="undefined">All</option>
+                    <option value="false">Active</option>
+                    <option value="true">Done</option>
+                </select>
 
                 <button hidden>Set Filter</button>
             </form>
