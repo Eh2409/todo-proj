@@ -7,13 +7,13 @@ export function DataTableRow({ todo, onRemoveTodo }) {
 
     return <Fragment>
         <tr>
-            <td  className="toggle-expand" onClick={() => {
+            <td className="toggle-expand" onClick={() => {
                 setIsExpanded(!isExpanded)
             }}>
                 {(isExpanded) ? '-' : '+'}
             </td>
             <td>{todo._id}</td>
-            <td className={(todo.isDone)? 'done' : ''}>{todo.txt}</td>
+            <td className={(todo.isDone) ? 'done' : ''}>{todo.txt}</td>
             <td>{todo.importance}</td>
             <td>
                 <Link to={`/todo/${todo._id}`}>Details</Link> |
@@ -25,7 +25,7 @@ export function DataTableRow({ todo, onRemoveTodo }) {
                 <h5>{todo.txt}</h5>
                 <img src={`https://robohash.org/${todo._id}`} style={{ maxWidth: '50px' }} />
                 <p>{todo.txt}s are best for lorem ipsum dolor</p>
-                <button onClick={() => onRemoveTodo(todo._id)}>Remove Todo</button>
+                <button onClick={() => onRemoveTodo(todo._id, todo.txt)}>Remove Todo</button>
             </td>
         </tr>
     </Fragment>

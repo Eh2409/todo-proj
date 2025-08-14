@@ -36,7 +36,10 @@ export function TodoIndex() {
             })
     }
 
-    function onRemoveTodo(todoId) {
+    function onRemoveTodo(todoId, todoTitle) {
+        const confirmMsg = `Are you sure you want to delete the todo "${todoTitle}"? \n This action cannot be undone.`
+        if (!confirm(confirmMsg)) return
+
         todoActions.remove(todoId)
             .then(() => {
                 showSuccessMsg(`Todo removed`)
