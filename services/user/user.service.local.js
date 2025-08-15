@@ -22,13 +22,14 @@ function getById(userId) {
 }
 
 function update(userToUpdate) {
-    const { _id, balance, fullname, prefs } = userToUpdate
+    const { _id, balance, fullname, prefs, activity } = userToUpdate
     return getById(_id).then(user => {
 
         if (!user) return Promise.reject('User not found')
         if (balance) user.balance = balance
         if (fullname) user.fullname = fullname
         if (prefs) user.prefs = { ...user.prefs, ...prefs }
+        if (activity) user.activities.unshift(activity)
 
         return storageService.put(STORAGE_KEY, user)
             .then(_setLoggedinUser)

@@ -5,7 +5,8 @@ export const utilService = {
     loadFromStorage,
     saveToStorage,
     animateCSS,
-    parseIsDone
+    parseIsDone,
+    formatTimeAgo
 }
 
 function makeId(length = 6) {
@@ -64,4 +65,25 @@ function parseIsDone(val) {
     if (val === 'true') return true
     if (val === 'false') return false
     return undefined
+}
+
+function formatTimeAgo(timestampe) {
+    const currDate = Date.now()
+    const Hour = 1000 * 60 * 60
+    const day = Hour * 24
+
+    if (currDate - timestampe < Hour) {
+        const timePass = currDate - timestampe
+        const Minutes = Math.floor(timePass / (1000 * 60))
+        return Minutes + ` ${Minutes > 1 ? "Minutes" : "Minute"} ago - `
+    } else if (currDate - timestampe < day) {
+        const timePass = currDate - timestampe
+        const Hours = Math.floor(timePass / (Hour))
+        return Hours + ` ${Hours > 1 ? "Hours" : "Hour"} ago - `
+    } else {
+        const options = { day: "2-digit", month: "2-digit", year: "2-digit" }
+        const date = new Date(timestampe)
+        const formattedDate = date.toLocaleString("he-IL", options)
+        return formattedDate + " - "
+    }
 }

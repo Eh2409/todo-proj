@@ -7,7 +7,8 @@ export const userActions = {
     update,
     login,
     signup,
-    logout
+    logout,
+    addActivity
 }
 
 function loadUser(filterBy = {}) {
@@ -32,6 +33,21 @@ function update(userToUpdate) {
         })
 }
 
+function addActivity(activity) {
+    const user = userService.getLoggedinUser()
+    if (!user) return
+
+    const userToUpdate = { _id: user._id, activity }
+
+    return userService.update(userToUpdate)
+        .then(user => {
+            store.dispatch({ type: SET_LOGGEDIN_USER, loggedinUser: user })
+        })
+        .catch(err => {
+            console.log('user action -> Cannot add activity to user', err)
+            throw err
+        })
+}
 
 // auth
 

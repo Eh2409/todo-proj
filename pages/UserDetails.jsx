@@ -2,6 +2,7 @@ const { useState, useEffect, useRef } = React
 const { useSelector } = ReactRedux
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
+import { UserActivities } from "../cmps/user/UserActivities.jsx"
 import { UserSettings } from "../cmps/user/UserSettings.jsx"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { userActions } from "../stroe/actions/user.actions.js"
@@ -42,8 +43,12 @@ export function UserDetails(props) {
 
             <section>
                 <UserSettings loggedinUser={loggedinUser} onSaveUserToUpdate={onSaveUserToUpdate} />
+
+                <UserActivities loggedinUser={loggedinUser} />
+
+
             </section>
 
-        </section>
+        </section >
     )
 }
