@@ -43,6 +43,16 @@ export function AppHeader() {
         })
     }, [isUserMenuOpen])
 
+    useEffect(() => {
+        if (loggedinUser) {
+            if (loggedinUser.prefs.color) document.body.style.color = loggedinUser.prefs.color
+            if (loggedinUser.prefs.bgColor) document.body.style.backgroundColor = loggedinUser.prefs.bgColor
+        } else {
+            document.body.style.color = ''
+            document.body.style.backgroundColor = ''
+        }
+    }, [loggedinUser])
+
     function handleClickOutside({ target }) {
         const elUserMenu = userMenuRef.current
         const elUserBtn = userBtnRef.current

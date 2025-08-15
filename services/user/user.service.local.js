@@ -22,11 +22,13 @@ function getById(userId) {
 }
 
 function update(userToUpdate) {
-    const { _id, balance, username } = userToUpdate
+    const { _id, balance, fullname, prefs } = userToUpdate
     return getById(_id).then(user => {
 
         if (!user) return Promise.reject('User not found')
         if (balance) user.balance = balance
+        if (fullname) user.fullname = fullname
+        if (prefs) user.prefs = { ...user.prefs, ...prefs }
 
         return storageService.put(STORAGE_KEY, user)
             .then(_setLoggedinUser)
@@ -50,7 +52,8 @@ function signup({ username, password, fullname }) {
         createdAt: Date.now(),
         updatedAt: Date.now(),
         balance: 1000,
-        activities: []
+        activities: [],
+        prefs: { color: '', bgColor: '' }
     }
 
     return storageService.post(STORAGE_KEY, user)
@@ -73,6 +76,7 @@ function _setLoggedinUser(user) {
         fullname: user.fullname,
         balance: user.balance,
         activities: user.activities,
+        prefs: user.prefs
     }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave

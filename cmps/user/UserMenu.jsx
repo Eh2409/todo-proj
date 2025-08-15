@@ -9,8 +9,8 @@ export function UserMenu({ loggedinUser, onLogout, userMenuRef, isUserMenuOpen, 
                     <div>Welcome {loggedinUser.fullname}</div>
                 </header>
                 <nav className="user-menu-nav">
-                    <NavLink to="/user" onClick={toggleIsUserMenuOpen}>My account</NavLink>
-                    <NavLink to="/user" onClick={() => { onLogout(), toggleIsUserMenuOpen() }}>Logout</NavLink>
+                    <NavLink to={`/user/${loggedinUser._id}`} onClick={toggleIsUserMenuOpen}>My account</NavLink>
+                    <NavLink to="/" onClick={() => { onLogout(), toggleIsUserMenuOpen() }}>Logout</NavLink>
                 </nav>
             </section>
         </div>
