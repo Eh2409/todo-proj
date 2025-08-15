@@ -7,7 +7,8 @@ export const userService = {
     logout,
     signup,
     getById,
-    query
+    query,
+    update
 }
 const STORAGE_KEY_LOGGEDIN = 'user'
 const STORAGE_KEY = 'userDB'
@@ -20,6 +21,18 @@ function getById(userId) {
     return storageService.get(STORAGE_KEY, userId)
 }
 
+function update(userToUpdate) {
+    const { _id, balance, username } = userToUpdate
+    return getById(_id).then(user => {
+
+        if (!user) return Promise.reject('User not found')
+        if (balance) user.balance = balance
+
+        return storageService.put(STORAGE_KEY, user)
+            .then(_setLoggedinUser)
+    })
+}
+
 function login({ username, password }) {
     return storageService.query(STORAGE_KEY)
         .then(users => {
@@ -30,8 +43,15 @@ function login({ username, password }) {
 }
 
 function signup({ username, password, fullname }) {
-    const user = { username, password, fullname }
-    user.createdAt = user.updatedAt = Date.now()
+    const user = {
+        username,
+        password,
+        fullname,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        balance: 1000,
+        activities: []
+    }
 
     return storageService.post(STORAGE_KEY, user)
         .then(_setLoggedinUser)
@@ -46,8 +66,14 @@ function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
 }
 
+
 function _setLoggedinUser(user) {
-    const userToSave = { _id: user._id, fullname: user.fullname }
+    const userToSave = {
+        _id: user._id,
+        fullname: user.fullname,
+        balance: user.balance,
+        activities: user.activities,
+    }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave
 }

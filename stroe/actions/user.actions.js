@@ -4,6 +4,7 @@ import { store } from "../store.js";
 
 export const userActions = {
     loadUser,
+    update,
     login,
     signup,
     logout
@@ -16,6 +17,17 @@ function loadUser(filterBy = {}) {
         })
         .catch(err => {
             console.log('user action -> Cannot load users', err)
+            throw err
+        })
+}
+
+function update(userToUpdate) {
+    return userService.update(userToUpdate)
+        .then(user => {
+            store.dispatch({ type: SET_LOGGEDIN_USER, loggedinUser: user })
+        })
+        .catch(err => {
+            console.log('user action -> Cannot update user', err)
             throw err
         })
 }

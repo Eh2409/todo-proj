@@ -1,4 +1,4 @@
-const { useState, useEffect, useRef } = React
+const { useState, useEffect, useRef, Fragemnt } = React
 const { Link, NavLink } = ReactRouterDOM
 const { useNavigate } = ReactRouter
 const { useSelector } = ReactRedux
@@ -141,11 +141,15 @@ export function AppHeader() {
 
                 {loggedinUser ? (
                     < section
-                        className="user-btn"
-                        ref={userBtnRef}
-                        onClick={toggleIsUserMenuOpen}
-                    >
-                        <div>{loggedinUser.fullname}</div>
+                        className="user-btn">
+
+                        <button
+                            ref={userBtnRef}
+                            onClick={toggleIsUserMenuOpen}>
+                            <span>{loggedinUser.fullname}</span>
+                        </button>
+
+                        <span>{loggedinUser.balance}</span>
 
                         <UserMenu
                             loggedinUser={loggedinUser}
