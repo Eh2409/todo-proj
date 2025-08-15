@@ -95,7 +95,7 @@ function _createTodos() {
 }
 
 function _createTodo(txt, importance) {
-    const todo = getEmptyTodo(txt, importance)
+    const todo = { txt, importance, isDone: false, color: undefined }
     todo._id = utilService.makeId()
     todo.createdAt = todo.updatedAt = Date.now() - utilService.getRandomIntInclusive(0, 1000 * 60 * 60 * 24)
     return todo

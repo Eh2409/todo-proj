@@ -62,7 +62,6 @@ export function AppHeader() {
                 if (counter < doneTodosPercentage) {
                     counter++
                 } else {
-                    console.log('pepe:')
                     counter -= 1
                 }
                 percentageRef.current.innerText = counter + '%'
