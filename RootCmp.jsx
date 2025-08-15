@@ -14,6 +14,8 @@ import { AboutVision } from "./cmps/AboutVision.jsx"
 import { Dashboard } from "./pages/Dashboard.jsx"
 import { store } from "./stroe/store.js"
 import { UserDetails } from "./pages/UserDetails.jsx"
+import { UserSettings } from "./cmps/user/UserSettings.jsx"
+import { UserActivities } from "./cmps/user/UserActivities.jsx"
 
 export function RootCmp() {
 
@@ -34,12 +36,14 @@ export function RootCmp() {
                             <Route path="/todo/edit" element={<TodoEdit />} />
                             <Route path="/todo" element={<TodoIndex />} />
                             <Route path="/dashboard" element={<Dashboard />} />
-                            <Route path="/user/:userId" element={<UserDetails />} />
-
+                            <Route path="/user/:userId" element={<UserDetails />} >
+                                <Route path="settings" element={<UserSettings />} />
+                                <Route path="activities" element={<UserActivities />} />
+                            </Route>
                         </Routes>
                     </main>
                 </section>
             </Router>
-        </Provider>
+        </Provider >
     )
 }

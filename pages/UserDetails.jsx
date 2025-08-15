@@ -1,11 +1,7 @@
 const { useState, useEffect, useRef } = React
 const { useSelector } = ReactRedux
-const { useParams, useNavigate, Link } = ReactRouterDOM
+const { useParams, useNavigate, Link, Outlet, NavLink } = ReactRouterDOM
 
-import { UserActivities } from "../cmps/user/UserActivities.jsx"
-import { UserSettings } from "../cmps/user/UserSettings.jsx"
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
-import { userActions } from "../stroe/actions/user.actions.js"
 
 export function UserDetails(props) {
     const navigate = useNavigate()
@@ -21,32 +17,18 @@ export function UserDetails(props) {
     }, [loggedinUser, userId])
 
 
-    function onSaveUserToUpdate(userToEdit) {
-        const userToSave = { _id: loggedinUser._id, ...userToEdit }
-        userActions.update(userToSave)
-            .then(() => {
-                showSuccessMsg('User updated successfully')
-            })
-            .catch(err => {
-                console.log('err:', err)
-                showErrorMsg('Cannot update user ')
-            })
-    }
-
-
     if (!loggedinUser) return
     return (
         <section className="user-details">
             <h2>Hello {loggedinUser.fullname}</h2>
 
-            <aside></aside>
+            <nav className="user-details-menu">
+                <NavLink to={`/user/${loggedinUser._id}/settings`}>My Settings</NavLink>
+                <NavLink to={`/user/${loggedinUser._id}/activities`}>My Activities</NavLink>
+            </nav>
 
             <section>
-                <UserSettings loggedinUser={loggedinUser} onSaveUserToUpdate={onSaveUserToUpdate} />
-
-                <UserActivities loggedinUser={loggedinUser} />
-
-
+                <Outlet />
             </section>
 
         </section >

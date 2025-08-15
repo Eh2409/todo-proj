@@ -1,6 +1,11 @@
 const { useState } = React
+const { useSelector } = ReactRedux
 
-export function UserSettings({ loggedinUser, onSaveUserToUpdate }) {
+import { userActions } from "../../stroe/actions/user.actions.js"
+import { showErrorMsg, showSuccessMsg } from "../../services/event-bus.service.js"
+
+export function UserSettings() {
+    const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
 
     const [userToEdit, setUserToEdit] = useState({
         fullname: '', prefs: {
@@ -32,20 +37,33 @@ export function UserSettings({ loggedinUser, onSaveUserToUpdate }) {
         } else return false
     }
 
-    function onSubmit(ev) {
+
+    function onSaveUserToUpdate(ev) {
         ev.preventDefault()
-        onSaveUserToUpdate(userToEdit)
+        const userToSave = { _id: loggedinUser._id, ...userToEdit }
+
+        userActions.update(userToSave)
+            .then(() => {
+                showSuccessMsg('User updated successfully')
+            })
+            .catch(err => {
+                console.log('err:', err)
+                showErrorMsg('Cannot update user ')
+            })
     }
+
 
     const { fullname, prefs: { color, bgColor } } = userToEdit
 
     return (
-        <section>
-            <form onSubmit={onSubmit}>
+        <section className="user-settings">
+            <h3>Settings</h3>
+
+            <form onSubmit={onSaveUserToUpdate}>
                 <label htmlFor="fullname">Update Fullname:</label>
                 <input type="text" name="fullname" id="fullname" value={fullname} onChange={handleChange} />
 
-                <label htmlFor="color">color:</label>
+                <label htmlFor="color">Color:</label>
                 <input type="color" name="color" id="color" value={color} onChange={handleChange} />
 
                 <label htmlFor="bgColor">Background Color:</label>

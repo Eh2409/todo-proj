@@ -11,6 +11,7 @@
 /* Pages */
 @import "pages/TodoDetails.css";
 @import "pages/TodoEdit.css";
+@import "pages/UserDetails.css";
 
 /* Components */
 @import "cmps/AppHeader.css";
@@ -27,3 +28,4 @@
 @import "cmps/todo/TodoPreview.css";
 @import "cmps/user/LoginSignup.css";
 @import "cmps/user/UserMenu.css";
+@import "cmps/user/UserSettings.css";

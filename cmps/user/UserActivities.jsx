@@ -1,6 +1,8 @@
+const { useSelector } = ReactRedux
 import { utilService } from "../../services/util.service.js"
 
-export function UserActivities({ loggedinUser }) {
+export function UserActivities() {
+    const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
 
     return (
         <section>
