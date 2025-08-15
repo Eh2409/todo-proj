@@ -10,6 +10,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { userActions } from "../stroe/actions/user.actions.js"
 import { todoActions } from "../stroe/actions/todo.actions.js"
 import { Popup } from "./Popup.jsx"
+import { UserMenu } from "./user/UserMenu.jsx"
 
 
 export function AppHeader() {
@@ -19,13 +20,37 @@ export function AppHeader() {
 
     const [currPercentage, setCurrPercentage] = useState(0)
     const percentageRef = useRef()
+    const userMenuRef = useRef()
+    const userBtnRef = useRef()
 
     const [isPopupOpen, setIsPopupOpen] = useState(false)
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
     const [isSignup, setIsSignUp] = useState(false)
 
     useEffect(() => {
         onLoadDoneTodosPercentage()
     }, [])
+
+    useEffect(() => {
+        if (isUserMenuOpen) {
+            addEventListener('mousedown', handleClickOutside)
+        } else {
+            removeEventListener('mousedown', handleClickOutside)
+        }
+
+        return (() => {
+            removeEventListener('mousedown', handleClickOutside)
+        })
+    }, [isUserMenuOpen])
+
+    function handleClickOutside({ target }) {
+        const elUserMenu = userMenuRef.current
+        const elUserBtn = userBtnRef.current
+        if (target !== elUserMenu && !elUserMenu.contains(target)) {
+            if (target === elUserBtn || elUserBtn.contains(target)) return
+            toggleIsUserMenuOpen()
+        }
+    }
 
     useEffect(() => {
         var counter = currPercentage
@@ -83,7 +108,7 @@ export function AppHeader() {
     function onLogout() {
         userActions.logout()
             .then(() => {
-                onSetUser(null)
+                showSuccessMsg('Logout in successfully')
             })
             .catch((err) => {
                 showErrorMsg('OOPs try again')
@@ -96,6 +121,10 @@ export function AppHeader() {
 
     function toggleIsPopupOpen() {
         setIsPopupOpen(!isPopupOpen)
+    }
+
+    function toggleIsUserMenuOpen() {
+        setIsUserMenuOpen(!isUserMenuOpen)
     }
 
     return (
@@ -112,9 +141,20 @@ export function AppHeader() {
                 </nav>
 
                 {loggedinUser ? (
-                    < section >
-                        <Link to={`/user/${loggedinUser._id}`}>{loggedinUser.fullname}</Link>
-                        <button onClick={onLogout}>Logout</button>
+                    < section
+                        className="user-btn"
+                        ref={userBtnRef}
+                        onClick={toggleIsUserMenuOpen}
+                    >
+                        <div>{loggedinUser.fullname}</div>
+
+                        <UserMenu
+                            loggedinUser={loggedinUser}
+                            onLogout={onLogout}
+                            userMenuRef={userMenuRef}
+                            isUserMenuOpen={isUserMenuOpen}
+                            toggleIsUserMenuOpen={toggleIsUserMenuOpen}
+                        />
                     </ section >
                 ) : (
                     <section>

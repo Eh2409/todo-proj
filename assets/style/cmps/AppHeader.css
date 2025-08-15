@@ -2,6 +2,11 @@
     background-color: var(--clr1);
     color: var(--clr2bg-light);
 
+    .user-btn {
+        position: relative;
+        padding-inline: 0.5em;
+    }
+
     .progress-bar {
         position: relative;
         padding-block: 0.2em;
