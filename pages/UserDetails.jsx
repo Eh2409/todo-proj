@@ -2,6 +2,7 @@ const { useState, useEffect, useRef } = React
 const { useSelector } = ReactRedux
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
+import { UserSettings } from "../cmps/user/UserSettings.jsx"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { userActions } from "../stroe/actions/user.actions.js"
 
@@ -11,13 +12,6 @@ export function UserDetails(props) {
     const { userId } = params
 
     const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
-    const [userToEdit, setUserToEdit] = useState({
-        fullname: '', prefs: {
-            color: loggedinUser.prefs.color || '',
-            bgColor: loggedinUser.prefs.bgColor || ''
-        }
-    })
-
 
     useEffect(() => {
         if (!loggedinUser || loggedinUser._id !== userId) {
@@ -25,31 +19,8 @@ export function UserDetails(props) {
         }
     }, [loggedinUser, userId])
 
-    function handleChange({ target }) {
-        const { name, value } = target
 
-        if (name === 'fullname') {
-            setUserToEdit(prev => ({ ...prev, fullname: value }))
-        } else {
-            setUserToEdit(prev => ({
-                ...prev,
-                prefs: { ...prev.prefs, [name]: value }
-            }))
-        }
-    }
-
-    function isDisabled() {
-        if (!userToEdit.fullname && !userToEdit.prefs.color && !userToEdit.prefs.bgColor
-            || !userToEdit.fullname &&
-            userToEdit.prefs.color === loggedinUser.prefs.color &&
-            userToEdit.prefs.bgColor === loggedinUser.prefs.bgColor
-        ) {
-            return true
-        } else return false
-    }
-
-    function onSaveUserToUpdate(ev) {
-        ev.preventDefault()
+    function onSaveUserToUpdate(userToEdit) {
         const userToSave = { _id: loggedinUser._id, ...userToEdit }
         userActions.update(userToSave)
             .then(() => {
@@ -61,8 +32,6 @@ export function UserDetails(props) {
             })
     }
 
-    const { fullname, prefs: { color, bgColor } } = userToEdit
-
 
     if (!loggedinUser) return
     return (
@@ -72,18 +41,7 @@ export function UserDetails(props) {
             <aside></aside>
 
             <section>
-                <form onSubmit={onSaveUserToUpdate}>
-                    <label htmlFor="fullname">Update Fullname:</label>
-                    <input type="text" name="fullname" id="fullname" value={fullname} onChange={handleChange} />
-
-                    <label htmlFor="color">color:</label>
-                    <input type="color" name="color" id="color" value={color} onChange={handleChange} />
-
-                    <label htmlFor="bgColor">Background Color:</label>
-                    <input type="color" name="bgColor" id="bgColor" value={bgColor} onChange={handleChange} />
-
-                    <button disabled={isDisabled()}>save</button>
-                </form>
+                <UserSettings loggedinUser={loggedinUser} onSaveUserToUpdate={onSaveUserToUpdate} />
             </section>
 
         </section>
