@@ -89,7 +89,7 @@ function _createTodos() {
         for (let i = 0; i < 20; i++) {
             const txt = txts[utilService.getRandomIntInclusive(0, txts.length - 1)]
             const description = txts[utilService.getRandomIntInclusive(0, txts.length - 1)]
-            todos.push(_createTodo(txt, description, (i + 1), utilService.getRandomIntInclusive(1, 10),))
+            todos.push(_createTodo(txt, description, utilService.getRandomIntInclusive(1, 10)))
         }
         utilService.saveToStorage(TODO_KEY, todos)
     }

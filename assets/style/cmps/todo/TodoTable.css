@@ -29,13 +29,13 @@
                     background-color: rgb(188, 225, 238);
                 }
             }
+
         }
 
 
         tr {
-
             &:has(.done) {
-                filter: grayscale(60%);
+                filter: grayscale(100%);
                 background-color: rgb(230, 227, 227);
             }
 
@@ -110,8 +110,9 @@
 
             .todo-info {
                 padding: 1em;
-                filter: grayscale(20%);
-                background-color: rgb(170, 218, 240);
+                filter: grayscale(50%);
+                background: linear-gradient(0deg, #0023a216 0%, transparent 20%, transparent 80%, #0023a216 100%);
+
             }
         }
     }

@@ -1,8 +1,9 @@
+import { TodoEdit } from "./TodoEdit.jsx"
 
 const { useState, Fragment } = React
 const { Link } = ReactRouterDOM
 
-export function TodoTableRow({ todo, onRemoveTodo, onToggleTodo }) {
+export function TodoTableRow({ todo, onRemoveTodo, onToggleTodo, todoIdToEdit, onSetTodoIdToEdit, toggleIsEditorOpen, saveTodo }) {
 
     const [isExpanded, setIsExpanded] = useState(false)
 
@@ -21,36 +22,71 @@ export function TodoTableRow({ todo, onRemoveTodo, onToggleTodo }) {
     }
 
     return (
-        <Fragment >
-            <tr className="todo-prev" style={{ backgroundColor: todo.color }}>
+        todoIdToEdit === todo._id ? (
+            <tr >
                 <td className="spiral"></td>
-                <td className={`todo-txt ${todo.isDone ? 'done' : ''}`} onClick={() => { setIsExpanded(!isExpanded) }}>
-                    <div className="txt-content">{todo.txt}</div>
+                <td colSpan="5">
+                    <TodoEdit
+                        toggleIsEditorOpen={toggleIsEditorOpen}
+                        saveTodo={saveTodo}
+                        todoIdToEdit={todoIdToEdit}
+                        onSetTodoIdToEdit={onSetTodoIdToEdit}
+                    />
                 </td>
-                <td className="todo-importance">
-                    <div className="num" style={{ backgroundColor: setImportanceColor(todo.importance) }}>{todo.importance}</div>
-                </td>
-                <td className="actions">
-                    <button onClick={() => onToggleTodo(todo)} title={todo.isDone ? "Mark as Undone" : "Mark as done"}>
-                        <img src={`/assets/img/${todo.isDone ? "done" : "undone"}.svg`} alt="done" className="icon" />
-                    </button>
-                    <Link to={`/todo/${todo._id}`} className="btn" title="Details">
-                        <img src="/assets/img/read.svg" alt="read" className="icon" />
-                    </Link>
-                    <Link to={`/todo/edit/${todo._id}`} className="btn" title="Edit">
-                        <img src="/assets/img/pen.svg" alt="pen" className="icon" />
-                    </Link>
-                    <button onClick={() => onRemoveTodo(todo._id, todo.txt)} title="Remove">
-                        <img src="/assets/img/trash.svg" alt="trash" className="icon" />
-                    </button>
-                </td>
+
             </tr>
-            <tr hidden={!isExpanded}>
-                <td colSpan="5" className="todo-info" style={{ backgroundColor: todo.color }}>
-                    <h3>{todo.txt}</h3>
-                    <p>{todo.description}</p>
-                </td>
-            </tr>
-        </Fragment>
+        ) : (
+            <Fragment>
+                <tr className="todo-prev" style={{ backgroundColor: todo.color }}>
+                    <td className="spiral"></td>
+                    <td
+                        className={`todo-txt ${todo.isDone ? 'done' : ''}`}
+                        onClick={() => setIsExpanded(!isExpanded)}
+                    >
+                        <div className="txt-content">{todo.txt}</div>
+                    </td>
+                    <td className="todo-importance">
+                        <div
+                            className="num"
+                            style={{ backgroundColor: setImportanceColor(todo.importance) }}
+                        >
+                            {todo.importance}
+                        </div>
+                    </td>
+                    <td className="actions">
+                        <button
+                            onClick={() => onToggleTodo(todo)}
+                            title={todo.isDone ? 'Mark as Undone' : 'Mark as done'}
+                        >
+                            <img
+                                src={`/assets/img/${todo.isDone ? 'done' : 'undone'}.svg`}
+                                alt="done"
+                                className="icon"
+                            />
+                        </button>
+                        <Link to={`/todo/${todo._id}`} className="btn" title="Details">
+                            <img src="/assets/img/read.svg" alt="read" className="icon" />
+                        </Link>
+
+                        <button onClick={() => onSetTodoIdToEdit(todo._id)}>
+                            <img src="/assets/img/pen.svg" alt="pen" className="icon" />
+                        </button>
+                        <button
+                            onClick={() => onRemoveTodo(todo._id, todo.txt)}
+                            title="Remove"
+                        >
+                            <img src="/assets/img/trash.svg" alt="trash" className="icon" />
+                        </button>
+                    </td>
+                </tr>
+
+                <tr hidden={!isExpanded}>
+                    <td colSpan="5" className={`todo-info ${todo.isDone ? 'done' : ''}`} style={{ backgroundColor: todo.color }}>
+                        <h3>{todo.txt}</h3>
+                        <p>{todo.description}</p>
+                    </td>
+                </tr>
+            </Fragment>
+        )
     )
 }

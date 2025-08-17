@@ -6,9 +6,8 @@ import { userActions } from "../stroe/actions/user.actions.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 import { TodoFilter } from "../cmps/todo/TodoFilter.jsx"
-import { TodoList } from "../cmps/todo/TodoList.jsx"
-import { DataTable } from "../cmps/todo/data-table/DataTable.jsx"
 import { TodoTable } from "../cmps/todo/TodoTable.jsx"
+import { TodoEdit } from "../cmps/todo/TodoEdit.jsx"
 
 const { useState, useEffect } = React
 const { Link, useSearchParams } = ReactRouterDOM
@@ -24,6 +23,8 @@ export function TodoIndex() {
     const defaultFilter = todoService.getFilterFromSearchParams(searchParams)
 
     const [filterBy, setFilterBy] = useState(defaultFilter)
+    const [isEditorOpen, setIsEditorOpen] = useState(false)
+    const [todoIdToEdit, setTodoIdToEdit] = useState(null)
 
     useEffect(() => {
         setSearchParams(filterBy)
@@ -77,26 +78,55 @@ export function TodoIndex() {
             })
     }
 
+    function toggleIsEditorOpen() {
+        setIsEditorOpen(!isEditorOpen)
+    }
+
+    function saveTodo(todoToEdit) {
+        todoActions.save(todoToEdit)
+            .then(savedTodoId => {
+                showSuccessMsg(`Todo Saved (id: ${savedTodoId})`)
+
+                if (isEditorOpen) toggleIsEditorOpen()
+                if (todoIdToEdit) onSetTodoIdToEdit(null)
+            })
+            .catch(err => {
+                showErrorMsg('Cannot save todo')
+                console.log('err:', err)
+            })
+    }
+
+    function onSetTodoIdToEdit(todoId) {
+        setTodoIdToEdit(todoId)
+    }
+
     if (!todos) return <div>Loading...</div>
     return (
         <section className="todo-index">
             <TodoFilter filterBy={filterBy} onSetFilterBy={setFilterBy} />
 
-            <div>
-                <Link to="/todo/edit" className="btn" >Add Todo</Link>
-            </div>
-
             <h2>Todos List</h2>
 
-            <TodoTable todos={todos} onRemoveTodo={onRemoveTodo} onToggleTodo={onToggleTodo} />
+            <div className={`todo-editor-wrapper ${isEditorOpen ? "edit-mode" : ""}`}>
+                {isEditorOpen
+                    ? <TodoEdit
+                        toggleIsEditorOpen={toggleIsEditorOpen}
+                        saveTodo={saveTodo}
+                    />
+                    : <button onClick={toggleIsEditorOpen}>Add Todo</button>
+                }
+            </div>
 
-            {/* <TodoList todos={todos} onRemoveTodo={onRemoveTodo} onToggleTodo={onToggleTodo} /> */}
+            <TodoTable
+                todos={todos}
+                onRemoveTodo={onRemoveTodo}
+                onToggleTodo={onToggleTodo}
+                todoIdToEdit={todoIdToEdit}
+                onSetTodoIdToEdit={onSetTodoIdToEdit}
+                toggleIsEditorOpen={toggleIsEditorOpen}
+                saveTodo={saveTodo}
+            />
 
-            {/* <hr />
-            <h2>Todos Table</h2>
-            <div style={{ width: '60%', margin: 'auto' }}>
-                <DataTable todos={todos} onRemoveTodo={onRemoveTodo} />
-            </div> */}
 
         </section>
     )

@@ -1,7 +1,7 @@
 import { TodoTableRow } from "./TodoTableRow.jsx"
 
 
-export function TodoTable({ todos, onRemoveTodo, onToggleTodo }) {
+export function TodoTable({ todos, onRemoveTodo, onToggleTodo, todoIdToEdit, onSetTodoIdToEdit, toggleIsEditorOpen, saveTodo }) {
 
 
 
@@ -21,6 +21,10 @@ export function TodoTable({ todos, onRemoveTodo, onToggleTodo }) {
                         todo={todo}
                         onRemoveTodo={onRemoveTodo}
                         onToggleTodo={onToggleTodo}
+                        todoIdToEdit={todoIdToEdit}
+                        onSetTodoIdToEdit={onSetTodoIdToEdit}
+                        toggleIsEditorOpen={toggleIsEditorOpen}
+                        saveTodo={saveTodo}
                         key={todo._id}
                     />
                 )}

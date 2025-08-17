@@ -1,0 +1,62 @@
+.todo-edit {
+    background-color: rgb(230, 251, 255);
+    padding: 0.5em;
+    border-radius: 10px;
+
+    .row {
+        display: flex;
+        align-items: center;
+        margin-block-end: 1em;
+        gap: 0.5em;
+
+        h2 {
+            margin-inline-end: auto;
+        }
+
+        .input-txt {
+            flex: 1 1;
+        }
+
+
+        .input-color {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+
+            border: none;
+            padding: 0;
+
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+
+            outline: 2px solid black;
+            cursor: pointer;
+
+            &::-webkit-color-swatch-wrapper {
+                padding: 0;
+            }
+
+            &::-webkit-color-swatch {
+                border: none;
+                border-radius: 50%;
+            }
+
+            &::-moz-color-swatch {
+                border: none;
+                border-radius: 50%;
+            }
+
+
+        }
+
+        .save-btn {
+            margin-inline-start: auto;
+        }
+
+    }
+
+    textarea {
+        width: 100%;
+    }
+}

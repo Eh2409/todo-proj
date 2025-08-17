@@ -10,8 +10,8 @@
 
 /* Pages */
 @import "pages/TodoDetails.css";
-@import "pages/TodoEdit.css";
 @import "pages/UserDetails.css";
+@import "pages/TodoIndex.css";
 
 /* Components */
 @import "cmps/AppHeader.css";
@@ -22,11 +22,12 @@
 @import "cmps/SplitPane.css";
 @import "cmps/Popup.css";
 
-@import "cmps/todo/DataTable.css";
+
 @import "cmps/todo/TodoFilter.css";
 @import "cmps/todo/TodoList.css";
 @import "cmps/todo/TodoPreview.css";
 @import "cmps/todo/TodoTable.css";
+@import "cmps/todo/TodoEdit.css";
 @import "cmps/user/LoginSignup.css";
 @import "cmps/user/UserMenu.css";
 @import "cmps/user/UserSettings.css";

@@ -1,0 +1,7 @@
+.todo-index {
+    .todo-editor-wrapper {
+        &.edit-mode {
+            margin-block-end: 1em;
+        }
+    }
+}
