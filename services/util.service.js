@@ -6,7 +6,8 @@ export const utilService = {
     saveToStorage,
     animateCSS,
     parseIsDone,
-    formatTimeAgo
+    formatTimeAgo,
+    cleanSearchParams
 }
 
 function makeId(length = 6) {
@@ -86,4 +87,20 @@ function formatTimeAgo(timestampe) {
         const formattedDate = date.toLocaleString("he-IL", options)
         return formattedDate + " - "
     }
+}
+
+
+function cleanSearchParams(searchParams) {
+
+    const cleanedParams = {}
+
+    for (const field in searchParams) {
+        if (field === 'pageIdx') {
+            cleanedParams[field] = searchParams[field]
+        } else if (searchParams[field]) {
+            cleanedParams[field] = searchParams[field]
+        }
+    }
+
+    return cleanedParams
 }

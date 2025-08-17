@@ -15,6 +15,7 @@ function getDefaultFilter() {
         isDone: undefined,
         sortType: 'createdAt',
         dir: -1,
+        pageIdx: 0
     }
 }
 
@@ -27,8 +28,10 @@ function getFilterFromSearchParams(searchParams) {
             filterBy[field] = utilService.parseIsDone(searchParams.get(field))
         } else if (field === 'dir') {
             filterBy[field] = +searchParams.get(`dir`) || defaultFilter[field]
+        } else if (field === 'pageIdx') {
+            filterBy[field] = +searchParams.get(`pageIdx`) || defaultFilter[field]
         } else {
-            filterBy[field] = searchParams.get(field) || ''
+            filterBy[field] = searchParams.get(field) || defaultFilter[field]
         }
     }
     return filterBy

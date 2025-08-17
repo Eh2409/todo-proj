@@ -9,6 +9,8 @@ import { TodoFilter } from "../cmps/todo/TodoFilter.jsx"
 import { TodoTable } from "../cmps/todo/TodoTable.jsx"
 import { TodoEdit } from "../cmps/todo/TodoEdit.jsx"
 import { TodoSort } from "../cmps/todo/TodoSort.jsx"
+import { Pagination } from "../cmps/Pagination.jsx"
+import { utilService } from "../services/util.service.js"
 
 const { useState, useEffect } = React
 const { Link, useSearchParams } = ReactRouterDOM
@@ -17,6 +19,7 @@ export function TodoIndex() {
 
     const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
     const todos = useSelector(storeState => storeState.todoModule.todos)
+    const maxPageCount = useSelector(storeState => storeState.todoModule.maxPageCount)
 
     // Special hook for accessing search-params:
     const [searchParams, setSearchParams] = useSearchParams()
@@ -27,8 +30,11 @@ export function TodoIndex() {
     const [isEditorOpen, setIsEditorOpen] = useState(false)
     const [todoIdToEdit, setTodoIdToEdit] = useState(null)
 
+    const [isFirstRender, setIsFirstRender] = useState(true)
+
+
     useEffect(() => {
-        setSearchParams(filterBy)
+        setSearchParams(utilService.cleanSearchParams(filterBy))
         loadTodos(filterBy)
     }, [filterBy])
 
@@ -102,10 +108,24 @@ export function TodoIndex() {
     }
 
     function onSetFilterBy(filterBy) {
-        setFilterBy(prev => ({ ...prev, ...filterBy }))
+
+        setFilterBy(prev => ({
+            ...prev, ...filterBy,
+            pageIdx: isFirstRender ? prev.pageIdx : 0
+        }))
+
+        if (isFirstRender) {
+            setIsFirstRender(false)
+        }
+
     }
 
-    const { txt, importance, isDone, sortType, dir } = filterBy
+
+    function setPageIdx(pageNum) {
+        setFilterBy(prevFilter => ({ ...prevFilter, pageIdx: pageNum }))
+    }
+
+    const { txt, importance, isDone, sortType, dir, pageIdx } = filterBy
 
     if (!todos) return <div>Loading...</div>
     return (
@@ -135,6 +155,7 @@ export function TodoIndex() {
                 saveTodo={saveTodo}
             />
 
+            <Pagination maxPageCount={maxPageCount} pageIdx={pageIdx} setPageIdx={setPageIdx} />
 
         </section>
     )

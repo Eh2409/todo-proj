@@ -62,7 +62,7 @@ export function TodoFilter({ filterBy, onSetFilterBy }) {
                     type="search" placeholder="By Txt" id="txt" name="txt"
                 />
                 <label htmlFor="importance">Importance: </label>
-                <input value={importance} onChange={handleChange}
+                <input value={importance || ''} onChange={handleChange}
                     type="number" placeholder="By Importance" id="importance" name="importance"
                 />
 

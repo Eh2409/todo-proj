@@ -2,6 +2,8 @@ import { utilService } from '../util.service.js'
 import { storageService } from '../async-storage.service.js'
 
 const TODO_KEY = 'todoDB'
+const PAGE_SIZE = 8
+
 _createTodos()
 
 export const todoService = {
@@ -41,8 +43,14 @@ function query(filterBy = {}) {
                 }
             }
 
+            const filteredTodosLength = todos.length
 
-            return includeDataFromServer({ todos })
+            if (filterBy.pageIdx !== undefined) {
+                const startIdx = filterBy.pageIdx * PAGE_SIZE
+                todos = todos.slice(startIdx, startIdx + PAGE_SIZE)
+            }
+
+            return includeDataFromServer({ todos, filteredTodosLength })
         })
 }
 
@@ -75,10 +83,22 @@ function save(todo) {
 }
 
 function includeDataFromServer(data = {}) {
-    return getDoneTodosPercentage().then(doneTodosPercentage => {
-        return { doneTodosPercentage, ...data }
-    })
+    const filteredTodosLength = data.filteredTodosLength
+    return Promise.all([getDoneTodosPercentage(), getMaxPage(filteredTodosLength)])
+        .then(([doneTodosPercentage, maxPageCount]) => {
+            return { doneTodosPercentage, maxPageCount, ...data }
+        })
 }
+
+function getMaxPage(filteredTodosLength) {
+    if (filteredTodosLength) return Promise.resolve(Math.ceil(filteredTodosLength / PAGE_SIZE))
+    return storageService.query(TODO_KEY)
+        .then(todos => Math.ceil(todos.length / PAGE_SIZE))
+        .catch(err => { throw err })
+}
+
+
+
 
 function getDoneTodosPercentage() {
     return storageService.query(TODO_KEY)
