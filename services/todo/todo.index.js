@@ -5,7 +5,7 @@ import { todoService as local } from "./todo.service.local.js"
 const isRemote = false
 
 function getEmptyTodo(txt = '', importance = 5) {
-    return { txt, importance, isDone: false, color: undefined }
+    return { txt, description, importance, isDone: false, color: undefined }
 }
 
 function getDefaultFilter() {

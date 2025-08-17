@@ -1,0 +1,119 @@
+.todo-table {
+    width: 100%;
+    background-color: rgb(230, 251, 255);
+    border-radius: 10px;
+    margin-block-end: 1em;
+    overflow: hidden;
+
+    border-collapse: collapse;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.358);
+
+    thead {
+        background-color: rgb(16, 160, 213);
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+
+        tr {
+            th {
+                padding-block: 10px;
+            }
+        }
+    }
+
+    tbody {
+
+        &>tr {
+            &.todo-prev {
+                &:nth-child(even of .todo-prev) {
+                    background-color: rgb(188, 225, 238);
+                }
+            }
+        }
+
+
+        tr {
+
+            &:has(.done) {
+                filter: grayscale(60%);
+                background-color: rgb(230, 227, 227);
+            }
+
+            .spiral {
+                position: relative;
+                min-width: 15px;
+                z-index: 0;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    right: 30%;
+                    translate: 0 -50%;
+
+                    width: 25px;
+                    height: 5px;
+                    background-color: rgb(180, 208, 255);
+                    border-radius: 100vh;
+                    border: 5px solid rgb(16, 160, 213);
+                }
+
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    background-color: black;
+                    border-radius: 50%;
+                }
+            }
+
+
+
+            .todo-txt {
+                width: 80%;
+                max-width: 30px;
+                padding-inline-start: 0.7em;
+                cursor: pointer;
+
+                .txt-content {
+                    display: block;
+
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+
+            .todo-importance {
+                justify-items: center;
+
+                .num {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: green;
+                    color: white;
+                    width: 30px;
+                    aspect-ratio: 1/1;
+                    border-radius: 50%;
+                    font-weight: bold;
+                }
+            }
+
+            .actions {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 0.1em;
+            }
+
+            .todo-info {
+                padding: 1em;
+                filter: grayscale(20%);
+                background-color: rgb(170, 218, 240);
+            }
+        }
+    }
+
+}

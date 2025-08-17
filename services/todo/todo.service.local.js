@@ -88,14 +88,15 @@ function _createTodos() {
         const txts = ['Learn React', 'Master CSS', 'Practice Redux']
         for (let i = 0; i < 20; i++) {
             const txt = txts[utilService.getRandomIntInclusive(0, txts.length - 1)]
-            todos.push(_createTodo(txt + (i + 1), utilService.getRandomIntInclusive(1, 10)))
+            const description = txts[utilService.getRandomIntInclusive(0, txts.length - 1)]
+            todos.push(_createTodo(txt, description, (i + 1), utilService.getRandomIntInclusive(1, 10),))
         }
         utilService.saveToStorage(TODO_KEY, todos)
     }
 }
 
-function _createTodo(txt, importance) {
-    const todo = { txt, importance, isDone: false, color: undefined }
+function _createTodo(txt, description, importance) {
+    const todo = { txt, description, importance, isDone: false, color: undefined }
     todo._id = utilService.makeId()
     todo.createdAt = todo.updatedAt = Date.now() - utilService.getRandomIntInclusive(0, 1000 * 60 * 60 * 24)
     return todo

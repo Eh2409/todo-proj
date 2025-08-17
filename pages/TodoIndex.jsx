@@ -8,6 +8,7 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { TodoFilter } from "../cmps/todo/TodoFilter.jsx"
 import { TodoList } from "../cmps/todo/TodoList.jsx"
 import { DataTable } from "../cmps/todo/data-table/DataTable.jsx"
+import { TodoTable } from "../cmps/todo/TodoTable.jsx"
 
 const { useState, useEffect } = React
 const { Link, useSearchParams } = ReactRouterDOM
@@ -80,16 +81,23 @@ export function TodoIndex() {
     return (
         <section className="todo-index">
             <TodoFilter filterBy={filterBy} onSetFilterBy={setFilterBy} />
+
             <div>
                 <Link to="/todo/edit" className="btn" >Add Todo</Link>
             </div>
+
             <h2>Todos List</h2>
-            <TodoList todos={todos} onRemoveTodo={onRemoveTodo} onToggleTodo={onToggleTodo} />
-            <hr />
+
+            <TodoTable todos={todos} onRemoveTodo={onRemoveTodo} onToggleTodo={onToggleTodo} />
+
+            {/* <TodoList todos={todos} onRemoveTodo={onRemoveTodo} onToggleTodo={onToggleTodo} /> */}
+
+            {/* <hr />
             <h2>Todos Table</h2>
             <div style={{ width: '60%', margin: 'auto' }}>
                 <DataTable todos={todos} onRemoveTodo={onRemoveTodo} />
-            </div>
+            </div> */}
+
         </section>
     )
 }

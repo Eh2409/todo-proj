@@ -26,6 +26,7 @@
 @import "cmps/todo/TodoFilter.css";
 @import "cmps/todo/TodoList.css";
 @import "cmps/todo/TodoPreview.css";
+@import "cmps/todo/TodoTable.css";
 @import "cmps/user/LoginSignup.css";
 @import "cmps/user/UserMenu.css";
 @import "cmps/user/UserSettings.css";

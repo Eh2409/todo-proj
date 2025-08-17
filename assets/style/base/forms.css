@@ -1,13 +1,25 @@
-button, .btn {
+button,
+.btn {
     cursor: pointer;
     background-color: var(--clr2bg);
     margin: 0.5em;
     border: 0;
     padding: 0.5em 0.8em;
     border-radius: 4px;
+
+    &:has(.icon) {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5em;
+        border-radius: 50%;
+    }
 }
 
-button:hover, .btn:hover {
+button:hover,
+.btn:hover {
     background-color: var(--clr2);
     color: white;
     transition: 0.3s;
