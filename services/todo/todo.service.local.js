@@ -33,7 +33,7 @@ function query(filterBy = {}) {
                 todos = todos.filter(todo => todo.isDone === filterBy.isDone)
             }
 
-            return todos
+            return includeDataFromServer({ todos })
         })
 }
 
@@ -46,19 +46,29 @@ function get(todoId) {
 }
 
 function remove(todoId) {
-    return storageService.remove(TODO_KEY, todoId)
+    return storageService.remove(TODO_KEY, todoId).then(() => includeDataFromServer())
 }
 
 function save(todo) {
     if (todo._id) {
         // TODO - updatable fields
         todo.updatedAt = Date.now()
-        return storageService.put(TODO_KEY, todo)
+        return storageService.put(TODO_KEY, todo).then(todo => {
+            return includeDataFromServer({ todo })
+        })
     } else {
         todo.createdAt = todo.updatedAt = Date.now()
 
-        return storageService.post(TODO_KEY, todo)
+        return storageService.post(TODO_KEY, todo).then(todo => {
+            return includeDataFromServer({ todo })
+        })
     }
+}
+
+function includeDataFromServer(data = {}) {
+    return getDoneTodosPercentage().then(doneTodosPercentage => {
+        return { doneTodosPercentage, ...data }
+    })
 }
 
 function getDoneTodosPercentage() {

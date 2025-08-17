@@ -14,7 +14,6 @@ import { UserMenu } from "./user/UserMenu.jsx"
 
 
 export function AppHeader() {
-    const navigate = useNavigate()
     const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
     const doneTodosPercentage = useSelector(storeState => storeState.todoModule.doneTodosPercentage)
 
@@ -27,9 +26,6 @@ export function AppHeader() {
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
     const [isSignup, setIsSignUp] = useState(false)
 
-    useEffect(() => {
-        onLoadDoneTodosPercentage()
-    }, [])
 
     useEffect(() => {
         if (isUserMenuOpen) {
@@ -82,14 +78,6 @@ export function AppHeader() {
             clearInterval(intervalId)
         })
     }, [doneTodosPercentage])
-
-
-    function onLoadDoneTodosPercentage() {
-        todoActions.getDoneTodosPercentage()
-            .catch((err) => {
-                showErrorMsg('Cannot get todo percentage')
-            })
-    }
 
 
     function login(credentials) {

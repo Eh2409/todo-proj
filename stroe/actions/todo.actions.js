@@ -6,15 +6,15 @@ import { userActions } from "./user.actions.js";
 export const todoActions = {
     loadTodos,
     remove,
-    save,
-    getDoneTodosPercentage
+    save
 }
 
 
 function loadTodos(filterBy = {}) {
     return todoService.query(filterBy)
-        .then(todos => {
+        .then(({ todos, doneTodosPercentage }) => {
             store.dispatch({ type: SET_TODOS, todos })
+            store.dispatch({ type: SET_DONE_PERCENTAGE, doneTodosPercentage })
         })
         .catch(err => {
             console.log('todo action -> Cannot load todos', err)
@@ -24,10 +24,9 @@ function loadTodos(filterBy = {}) {
 
 function remove(todoId) {
     return todoService.remove(todoId)
-        .then(() => {
+        .then(({ doneTodosPercentage }) => {
             store.dispatch({ type: REMOVE_TODO, todoId })
-
-            getDoneTodosPercentage()
+            store.dispatch({ type: SET_DONE_PERCENTAGE, doneTodosPercentage })
 
             const activity = { txt: `Removed todo ${todoId}`, at: Date.now() }
             userActions.addActivity(activity)
@@ -42,20 +41,20 @@ function save(todoToSave) {
     const method = todoToSave._id ? "update" : "add"
 
     return todoService.save(todoToSave)
-        .then(savedTodo => {
+        .then(({ todo, doneTodosPercentage }) => {
 
             if (method === 'update') {
-                store.dispatch({ type: UPDATE_TODO, todo: savedTodo })
+                store.dispatch({ type: UPDATE_TODO, todo })
             } else {
-                store.dispatch({ type: ADD_TODO, todo: savedTodo })
+                store.dispatch({ type: ADD_TODO, todo })
             }
 
-            getDoneTodosPercentage()
+            store.dispatch({ type: SET_DONE_PERCENTAGE, doneTodosPercentage })
 
             const activity = { txt: `${method === 'update' ? "Updated" : "Added"} todo ${todoToSave.txt}`, at: Date.now() }
             userActions.addActivity(activity)
 
-            return savedTodo._id
+            return todo._id
         })
         .catch(err => {
             console.log('todo action -> Cannot save todo', err)
@@ -63,13 +62,3 @@ function save(todoToSave) {
         })
 }
 
-function getDoneTodosPercentage() {
-    return todoService.getDoneTodosPercentage()
-        .then(doneTodosPercentage => {
-            store.dispatch({ type: SET_DONE_PERCENTAGE, doneTodosPercentage })
-        })
-        .catch(err => {
-            console.log('todo action -> Cannot get todo percentage', err)
-            throw err
-        })
-}
