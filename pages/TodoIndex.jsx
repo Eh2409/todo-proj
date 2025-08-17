@@ -8,6 +8,7 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { TodoFilter } from "../cmps/todo/TodoFilter.jsx"
 import { TodoTable } from "../cmps/todo/TodoTable.jsx"
 import { TodoEdit } from "../cmps/todo/TodoEdit.jsx"
+import { TodoSort } from "../cmps/todo/TodoSort.jsx"
 
 const { useState, useEffect } = React
 const { Link, useSearchParams } = ReactRouterDOM
@@ -100,10 +101,17 @@ export function TodoIndex() {
         setTodoIdToEdit(todoId)
     }
 
+    function onSetFilterBy(filterBy) {
+        setFilterBy(prev => ({ ...prev, ...filterBy }))
+    }
+
+    const { txt, importance, isDone, sortType, dir } = filterBy
+
     if (!todos) return <div>Loading...</div>
     return (
         <section className="todo-index">
-            <TodoFilter filterBy={filterBy} onSetFilterBy={setFilterBy} />
+            <TodoFilter filterBy={{ txt, importance, isDone }} onSetFilterBy={onSetFilterBy} />
+            <TodoSort sortBy={{ sortType, dir }} onSetFilterBy={onSetFilterBy} />
 
             <h2>Todos List</h2>
 

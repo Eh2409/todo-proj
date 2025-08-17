@@ -28,10 +28,19 @@ function query(filterBy = {}) {
             }
 
             if (filterBy.isDone !== undefined) {
-                console.log('pepekaka:')
-                console.log(typeof filterBy.isDone)
                 todos = todos.filter(todo => todo.isDone === filterBy.isDone)
             }
+
+            if (filterBy.sortType && filterBy.dir) {
+                if (filterBy.sortType === 'importance') {
+                    todos = todos.sort((t1, t2) => (t1.importance - t2.importance) * filterBy.dir)
+                } else if (filterBy.sortType === 'createdAt') {
+                    todos = todos.sort((t1, t2) => (t1.createdAt - t2.createdAt) * filterBy.dir)
+                } else if (filterBy.sortType === 'title') {
+                    todos = todos.sort((t1, t2) => (t1.txt.localeCompare(t2.txt)) * filterBy.dir)
+                }
+            }
+
 
             return includeDataFromServer({ todos })
         })
