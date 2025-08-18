@@ -4,5 +4,15 @@
     form {
         display: grid;
         gap: 0.5em;
+
+        input {
+            font-size: 1em;
+        }
+    }
+
+    .signup-msg-toggle {
+        text-align: center;
+        cursor: pointer;
+        color: var(--signupBgClr)
     }
 }

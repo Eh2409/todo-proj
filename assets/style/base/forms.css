@@ -1,7 +1,7 @@
 button,
 .btn {
     display: flex;
-
+    justify-content: center;
     cursor: pointer;
     margin: 0.5em;
     border: 0;
@@ -12,6 +12,26 @@ button,
     &.mobile-nav-switch-btn,
     &.login-signup-btn {
         outline: var(--btnOutlineColor1) solid 1px;
+    }
+
+    &.signup,
+    &.login {
+        font-weight: bold;
+        font-size: 1em;
+        margin-block-end: 1em;
+        color: white;
+
+        &:hover {
+            filter: brightness(1.2);
+        }
+    }
+
+    &.signup {
+        background-color: var(--signupBgClr);
+    }
+
+    &.login {
+        background-color: var(--loginBgClr);
     }
 
     &.close-btn {
@@ -29,7 +49,7 @@ button,
         margin: 0;
         padding: 0;
         justify-content: center;
-        align-items: center;
+        align-items: end;
         padding: 0.5em;
         border-radius: 50%;
     }
@@ -40,6 +60,9 @@ button:hover,
     transition: 0.3s;
 }
 
-input:focus {
-    transition: background-color 1s;
+input {
+    outline: 1px solid var(--btnOutlineColor1);
+    border-radius: 5px;
+    border: none;
+    padding: 0.5em;
 }

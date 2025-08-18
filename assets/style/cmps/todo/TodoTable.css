@@ -34,6 +34,9 @@
 
 
         tr {
+            filter: grayscale(0%);
+            transition: filter 400ms ease-in-out;
+
             &:has(.done) {
                 filter: grayscale(100%);
                 background-color: rgb(230, 227, 227);

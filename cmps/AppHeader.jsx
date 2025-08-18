@@ -212,6 +212,7 @@ export function AppHeader() {
 
                 <Popup
                     header={<h2>{isSignup ? "Signup" : "Login"}</h2>}
+                    aside={<img src="/assets/img/popup-img.png" alt="popup-img" />}
                     toggleIsPopupOpen={toggleIsPopupOpen}
                     isPopupOpen={isPopupOpen}>
 

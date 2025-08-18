@@ -62,16 +62,16 @@ export function LoginSignup({ isPopupOpen, signup, login, toggleIsSignup, isSign
                     onChange={handleChange}
                     required
                 />}
-                <button>{isSignup ? 'Signup' : 'Login'}</button>
+                <button className={isSignup ? 'signup' : 'login'}>{isSignup ? 'Signup' : 'Login'}</button>
             </form>
 
-            <div className="btns">
-                <a href="#" onClick={toggleIsSignup}>
+            <div className='signup-msg-toggle' >
+                <div onClick={toggleIsSignup}>
                     {isSignup ?
                         'Already a member? Login' :
                         'New user? Signup here'
                     }
-                </a >
+                </div >
             </div>
         </div >
     )
