@@ -5,17 +5,20 @@ export function UserActivities() {
     const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
 
     return (
-        <section>
+        <section className="user-activities">
             <h3>Activities</h3>
 
-            {loggedinUser.activities.length > 0 && <ul>
+            {loggedinUser.activities.length > 0 ? <ul>
                 {loggedinUser.activities.map(a => {
                     return < li key={a.at}>
                         <span>{utilService.formatTimeAgo(a.at)}</span>
                         <span>{a.txt}</span>
                     </li>
                 })}
-            </ul>}
+            </ul>
+                : <div> - No activities yet. Start by adding one!</div>
+            }
+
         </section>
     )
 }

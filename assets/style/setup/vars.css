@@ -1,7 +1,7 @@
 :root {
   --headerColor1: rgb(245, 245, 245);
-
-  --btnOutlineColor1: rgb(181, 207, 219);
+  --userDetailsBgClr1: rgb(242, 251, 255);
+  --btnOutlineColor1: rgb(195, 221, 233);
 
   --signupBgClr: rgb(0, 119, 255);
   --loginBgClr: rgb(26, 188, 26);

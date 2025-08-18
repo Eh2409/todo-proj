@@ -18,38 +18,6 @@
         }
 
 
-        .input-color {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-
-            border: none;
-            padding: 0;
-
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-
-            outline: 2px solid black;
-            cursor: pointer;
-
-            &::-webkit-color-swatch-wrapper {
-                padding: 0;
-            }
-
-            &::-webkit-color-swatch {
-                border: none;
-                border-radius: 50%;
-            }
-
-            &::-moz-color-swatch {
-                border: none;
-                border-radius: 50%;
-            }
-
-
-        }
-
         .save-btn {
             margin-inline-start: auto;
         }

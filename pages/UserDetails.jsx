@@ -27,7 +27,7 @@ export function UserDetails(props) {
                 <NavLink to={`/user/${loggedinUser._id}/activities`}>My Activities</NavLink>
             </nav>
 
-            <section>
+            <section className="user-details-content">
                 <Outlet />
             </section>
 

@@ -26,7 +26,7 @@
 
         background-color: var(--headerColor1);
 
-        min-width: 20vw;
+        min-width: 10vw;
         scale: 0.8;
         transition: 200ms ease-in-out;
 

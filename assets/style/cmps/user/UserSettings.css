@@ -1,6 +1,14 @@
 .user-settings {
+
+    h3 {
+        padding-block-end: 0.5em;
+        box-shadow: 0px 1px 0px var(--btnOutlineColor1);
+    }
+
     form {
         display: grid;
+        align-items: center;
+
         grid-template-columns: max-content 1fr;
         gap: 0.5em;
         justify-self: start;
