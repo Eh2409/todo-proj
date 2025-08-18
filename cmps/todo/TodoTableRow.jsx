@@ -57,6 +57,7 @@ export function TodoTableRow({ todo, onRemoveTodo, onToggleTodo, todoIdToEdit, o
                         <button
                             onClick={() => onToggleTodo(todo)}
                             title={todo.isDone ? 'Mark as Undone' : 'Mark as done'}
+                            className="action"
                         >
                             <img
                                 src={`/assets/img/${todo.isDone ? 'done' : 'undone'}.svg`}
@@ -64,16 +65,17 @@ export function TodoTableRow({ todo, onRemoveTodo, onToggleTodo, todoIdToEdit, o
                                 className="icon"
                             />
                         </button>
-                        <Link to={`/todo/${todo._id}`} className="btn" title="Details">
+                        <Link to={`/todo/${todo._id}`} className="btn action" title="Details">
                             <img src="/assets/img/read.svg" alt="read" className="icon" />
                         </Link>
 
-                        <button onClick={() => onSetTodoIdToEdit(todo._id)}>
+                        <button onClick={() => onSetTodoIdToEdit(todo._id)} className="action">
                             <img src="/assets/img/pen.svg" alt="pen" className="icon" />
                         </button>
                         <button
                             onClick={() => onRemoveTodo(todo._id, todo.txt)}
                             title="Remove"
+                            className="action"
                         >
                             <img src="/assets/img/trash.svg" alt="trash" className="icon" />
                         </button>

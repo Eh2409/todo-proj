@@ -88,12 +88,12 @@ export function TodoEdit({ toggleIsEditorOpen, saveTodo, todoIdToEdit, onSetTodo
 
                 <div className="row">
 
-                    <label title={isDone ? "Mark as Undone" : "Mark as done"} className="btn">
+                    <label title={isDone ? "Mark as Undone" : "Mark as done"} className="btn action">
                         <img src={`/assets/img/${isDone ? "done" : "undone"}.svg`} alt="done" className="icon" />
                         <input onChange={handleChange} value={isDone} type="checkbox" name="isDone" hidden={true} />
                     </label>
 
-                    <label title={color ? "Remove background color" : "Add background color"} className="btn">
+                    <label title={color ? "Remove background color" : "Add background color"} className="btn action">
                         <img src={`/assets/img/${color ? "no-color" : "color"}.svg`} alt="use color" className="icon" />
                         <input onChange={handleChange} type="checkbox" value={!!color} checked={!!color} name="color" hidden={true} />
                     </label>

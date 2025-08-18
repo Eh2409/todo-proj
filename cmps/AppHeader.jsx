@@ -1,16 +1,17 @@
-const { useState, useEffect, useRef, Fragemnt } = React
-const { Link, NavLink } = ReactRouterDOM
-const { useNavigate } = ReactRouter
+const { useState, useEffect, useRef } = React
+const { NavLink } = ReactRouterDOM
 const { useSelector } = ReactRedux
 
-
-import { UserMsg } from "./UserMsg.jsx"
-import { LoginSignup } from './user/LoginSignup.jsx'
+// services
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { userActions } from "../stroe/actions/user.actions.js"
-import { todoActions } from "../stroe/actions/todo.actions.js"
+
+// cmps
+import { UserMsg } from "./UserMsg.jsx"
+import { LoginSignup } from './user/LoginSignup.jsx'
 import { Popup } from "./Popup.jsx"
 import { UserMenu } from "./user/UserMenu.jsx"
+
 
 
 export function AppHeader() {
@@ -25,6 +26,7 @@ export function AppHeader() {
     const [isPopupOpen, setIsPopupOpen] = useState(false)
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
     const [isSignup, setIsSignUp] = useState(false)
+    const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
 
     useEffect(() => {
@@ -124,18 +126,59 @@ export function AppHeader() {
         setIsUserMenuOpen(!isUserMenuOpen)
     }
 
+    function toggleIsMobileNavOpen() {
+        if (window.innerWidth <= 750) {
+            setIsMobileNavOpen(!isMobileNavOpen)
+        }
+    }
+
     return (
         <header className="app-header full main-layout">
             <section className="header-container">
-                <h1>React Todo App</h1>
 
+                <div className='main-logo-wrapper'>
+                    <button
+                        className='mobile-nav-switch-btn action'
+                        onClick={toggleIsMobileNavOpen}>
+                        <img src="/assets/img/bars.svg" alt="bars" className='icon' />
+                    </button>
 
-                <nav className="app-nav">
-                    <NavLink to="/" >Home</NavLink>
-                    <NavLink to="/about" >About</NavLink>
-                    <NavLink to="/todo" >Todos</NavLink>
-                    <NavLink to="/dashboard" >Dashboard</NavLink>
-                </nav>
+                    <h1 className='main-logo'>Todo App</h1>
+                </div>
+
+                <div>
+                    <div
+                        className={`main-nav-black-wrapper ${isMobileNavOpen ? "nav-open" : ""}`}
+                        onClick={toggleIsMobileNavOpen}
+                    ></div>
+
+                    <nav className={`app-nav ${isMobileNavOpen ? "nav-open" : ""}`}>
+                        <div className='nav-header'>
+                            <h2>Todo App</h2>
+
+                            <button
+                                onClick={toggleIsMobileNavOpen}
+                                className='action close-btn'
+                            >X</button>
+                        </div>
+                        <NavLink to="/" onClick={toggleIsMobileNavOpen} >
+                            <img src="/assets/img/house.svg" alt="Home" className='icon' />
+                            <span>Home</span>
+                        </NavLink>
+                        <NavLink to="/about" onClick={toggleIsMobileNavOpen} >
+                            <img src="/assets/img/address.svg" alt="About" className='icon' />
+                            <span>About</span>
+                        </NavLink>
+                        <NavLink to="/todo" onClick={toggleIsMobileNavOpen}>
+                            <img src="/assets/img/list.svg" alt="Todos" className='icon' />
+                            <span>Todos</span>
+                        </NavLink>
+                        <NavLink to="/dashboard" onClick={toggleIsMobileNavOpen} >
+                            <img src="/assets/img/chart.svg" alt="Dashboard" className='icon' />
+                            <span>Dashboard</span>
+                        </NavLink>
+                    </nav>
+                </div>
 
                 {loggedinUser ? (
                     < section
@@ -143,7 +186,8 @@ export function AppHeader() {
 
                         <button
                             ref={userBtnRef}
-                            onClick={toggleIsUserMenuOpen}>
+                            onClick={toggleIsUserMenuOpen}
+                            className='login-signup-btn'>
                             <span>{loggedinUser.fullname}</span>
                         </button>
 
@@ -159,7 +203,9 @@ export function AppHeader() {
                     </ section >
                 ) : (
                     <section>
-                        <button onClick={toggleIsPopupOpen}>Login / Signup</button>
+                        <button onClick={toggleIsPopupOpen}
+                            className='login-signup-btn'
+                        >Login / Signup</button>
                     </section>
                 )}
 
@@ -178,7 +224,6 @@ export function AppHeader() {
                     />
 
                 </Popup>
-
 
             </section>
             <UserMsg />
