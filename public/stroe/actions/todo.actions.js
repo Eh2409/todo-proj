@@ -32,6 +32,7 @@ function loadTodos(filterBy = {}) {
 function remove(todoId) {
     return todoService.remove(todoId)
         .then(({ doneTodosPercentage, maxPageCount }) => {
+
             store.dispatch({ type: REMOVE_TODO, todoId })
             store.dispatch({ type: SET_DONE_PERCENTAGE, doneTodosPercentage })
             store.dispatch({ type: SET_MAX_PAGE_COUNT, maxPageCount })

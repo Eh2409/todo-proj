@@ -1,6 +1,5 @@
 
 import { todoService } from "../../services/todo/todo.index.js"
-import { TodoLoader } from "./TodoLoader.jsx"
 
 const { useState, useEffect, Fragment } = React
 
@@ -15,7 +14,7 @@ export function TodoEdit({ toggleIsEditorOpen, saveTodo, todoIdToEdit, onSetTodo
     }, [todoIdToEdit])
 
     function loadTodo() {
-        todoService.get(todoIdToEdit)
+        todoService.getById(todoIdToEdit)
             .then(setTodoToEdit)
             .catch(err => console.log('err:', err))
     }

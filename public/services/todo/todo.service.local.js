@@ -8,12 +8,12 @@ _createTodos()
 
 export const todoService = {
     query,
-    get,
+    getById,
     remove,
     save,
-    getDoneTodosPercentage,
     getImportanceStats,
 }
+
 // For Debug (easy access from console):
 window.cs = todoService
 
@@ -54,7 +54,7 @@ function query(filterBy = {}) {
         })
 }
 
-function get(todoId) {
+function getById(todoId) {
     return storageService.get(TODO_KEY, todoId)
         .then(todo => {
             todo = _setNextPrevTodoId(todo)

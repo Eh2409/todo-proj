@@ -1,8 +1,10 @@
 import { utilService } from "../util.service.js"
 
 import { todoService as local } from "./todo.service.local.js"
+import { todoService as remote } from "./todo.services.remote.js"
 
-const isRemote = false
+
+const isRemote = true
 
 function getEmptyTodo(txt = '', importance = 5) {
     return { txt, description: '', importance, isDone: false, color: undefined }
@@ -37,5 +39,5 @@ function getFilterFromSearchParams(searchParams) {
     return filterBy
 }
 
-const service = local
+const service = isRemote ? remote : local
 export const todoService = { ...service, getEmptyTodo, getDefaultFilter, getFilterFromSearchParams }

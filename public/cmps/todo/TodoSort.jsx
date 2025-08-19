@@ -3,8 +3,6 @@ const { useState, useEffect, useRef } = React
 
 export function TodoSort({ sortBy, onSetFilterBy }) {
 
-    console.log('sortBy:', sortBy)
-
     const [sortByToEdit, setSortByToEdit] = useState(sortBy)
     const [selectValue, setSelectValue] = useState('')
 

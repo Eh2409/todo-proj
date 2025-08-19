@@ -15,8 +15,6 @@ export function TodoFilter({ filterBy, onSetFilterBy, isFilterOpen, filterRef })
         const field = target.name
         let value = target.value
 
-        console.log('Here:', target.type)
-
         switch (target.type) {
             case 'number':
             case 'range':

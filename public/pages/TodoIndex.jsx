@@ -22,9 +22,6 @@ export function TodoIndex() {
     const maxPageCount = useSelector(storeState => storeState.todoModule.maxPageCount)
     const isLoading = useSelector(storeState => storeState.todoModule.isLoading)
 
-
-    console.log('maxPageCount:', maxPageCount)
-
     // Special hook for accessing search-params:
     const [searchParams, setSearchParams] = useSearchParams()
 
@@ -173,7 +170,6 @@ export function TodoIndex() {
 
     const { txt, importance, isDone, sortType, dir, pageIdx } = filterBy
 
-    if (!todos) return <div>Loading...</div>
     return (
         <section className="todo-index">
 

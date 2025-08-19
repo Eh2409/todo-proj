@@ -17,7 +17,6 @@ export function TodoTable({ todos, onRemoveTodo, onToggleTodo, todoIdToEdit, onS
             <tbody>
                 {isLoading ?
                     (Array.from({ length: 8 }).map((_, idx) => {
-                        console.log('idx:', idx)
                         const isEvenNum = (idx + 1) % 2 === 0
                         return <TodoLoader key={idx} isEvenNum={isEvenNum} />
                     }))

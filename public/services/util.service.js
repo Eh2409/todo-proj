@@ -96,7 +96,7 @@ function cleanSearchParams(searchParams) {
     const cleanedParams = {}
 
     for (const field in searchParams) {
-        if (field === 'pageIdx') {
+        if (field === 'pageIdx' || field === 'isDone') {
             cleanedParams[field] = searchParams[field]
         } else if (searchParams[field]) {
             cleanedParams[field] = searchParams[field]
