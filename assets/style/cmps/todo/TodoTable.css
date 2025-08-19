@@ -1,15 +1,15 @@
 .todo-table {
     width: 100%;
-    background-color: rgb(230, 251, 255);
+    background-color: var(--todoTabelBgClr2);
     border-radius: 10px;
-    margin-block-end: 1em;
+    margin-block-end: 2em;
     overflow: hidden;
 
     border-collapse: collapse;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.358);
 
     thead {
-        background-color: rgb(16, 160, 213);
+        background-color: var(--todoTabelBgClr1);
         border-radius: 10px;
         color: white;
         font-weight: bold;
@@ -26,7 +26,7 @@
         &>tr {
             &.todo-prev {
                 &:nth-child(even of .todo-prev) {
-                    background-color: rgb(188, 225, 238);
+                    background-color: var(--todoTabelBgClr3);
                 }
             }
 
@@ -39,7 +39,7 @@
 
             &:has(.done) {
                 filter: grayscale(100%);
-                background-color: rgb(230, 227, 227);
+                background-color: var(--todoDoneBgClr1);
             }
 
             .spiral {
@@ -56,9 +56,9 @@
 
                     width: 25px;
                     height: 5px;
-                    background-color: rgb(180, 208, 255);
+                    background-color: var(--todoTabelBgClr3);
                     border-radius: 100vh;
-                    border: 5px solid rgb(16, 160, 213);
+                    border: 5px solid var(--todoTabelBgClr1);
                 }
 
                 &::before {

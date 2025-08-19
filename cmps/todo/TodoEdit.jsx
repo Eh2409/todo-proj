@@ -39,7 +39,7 @@ export function TodoEdit({ toggleIsEditorOpen, saveTodo, todoIdToEdit, onSetTodo
         }
 
         if (field === 'color' && target.type === 'checkbox') {
-            value = value ? "#e6fffb" : undefined
+            value = value ? "#e6fbff" : undefined
         }
 
         setTodoToEdit(prevTodoToEdit => ({ ...prevTodoToEdit, [field]: value }))
@@ -58,7 +58,8 @@ export function TodoEdit({ toggleIsEditorOpen, saveTodo, todoIdToEdit, onSetTodo
 
             <div className="row">
                 <h2>{todoIdToEdit ? `Edit Todo` : "Add Todo"}</h2>
-                <button onClick={() => todoIdToEdit ? onSetTodoIdToEdit(null) : toggleIsEditorOpen()}>x</button>
+                <button onClick={() => todoIdToEdit ? onSetTodoIdToEdit(null) : toggleIsEditorOpen()}
+                    className="action close-btn">x</button>
             </div>
 
             <form onSubmit={onSaveTodo} >
@@ -67,7 +68,7 @@ export function TodoEdit({ toggleIsEditorOpen, saveTodo, todoIdToEdit, onSetTodo
                         onChange={handleChange}
                         value={txt} type="text"
                         name="txt"
-                        placeholder="title"
+                        placeholder="Title"
                         className="input-txt" />
 
                     <input onChange={handleChange}
@@ -75,6 +76,8 @@ export function TodoEdit({ toggleIsEditorOpen, saveTodo, todoIdToEdit, onSetTodo
                         type="number"
                         name="importance"
                         title="importance"
+                        className="input-importance"
+                        placeholder="Importance"
                         min={1} max={10} />
                 </div>
 

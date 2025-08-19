@@ -5,4 +5,9 @@
 
   --signupBgClr: rgb(0, 119, 255);
   --loginBgClr: rgb(26, 188, 26);
+
+  --todoTabelBgClr1: rgb(16, 160, 213);
+  --todoTabelBgClr2: rgb(230, 251, 255);
+  --todoTabelBgClr3: rgb(199, 238, 252);
+  --todoDoneBgClr1: rgb(230, 227, 227);
 }

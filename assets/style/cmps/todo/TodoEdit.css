@@ -1,7 +1,7 @@
 .todo-edit {
-    background-color: rgb(230, 251, 255);
     padding: 0.5em;
     border-radius: 10px;
+    background-color: var(--todoTabelBgClr2);
 
     .row {
         display: flex;
@@ -17,6 +17,9 @@
             flex: 1 1;
         }
 
+        .input-importance {
+            width: 90px;
+        }
 
         .save-btn {
             margin-inline-start: auto;
