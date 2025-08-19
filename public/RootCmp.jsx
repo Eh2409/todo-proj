@@ -1,4 +1,4 @@
-const Router = ReactRouterDOM.HashRouter
+const Router = ReactRouterDOM.BrowserRouter
 const { Routes, Route } = ReactRouterDOM
 const { Provider } = ReactRedux
 const { useEffect } = React
