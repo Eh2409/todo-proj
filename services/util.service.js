@@ -7,7 +7,8 @@ export const utilService = {
     animateCSS,
     parseIsDone,
     formatTimeAgo,
-    cleanSearchParams
+    cleanSearchParams,
+    setImportanceColor
 }
 
 function makeId(length = 6) {
@@ -103,4 +104,18 @@ function cleanSearchParams(searchParams) {
     }
 
     return cleanedParams
+}
+
+function setImportanceColor(importanceNum) {
+    var color = "green"
+    if (importanceNum > 8) {
+        return color = "red"
+    } else if (importanceNum > 6) {
+        return color = "orange"
+    } else if (importanceNum > 4) {
+        return color = "gold"
+    } else if (importanceNum > 2) {
+        return color = "yellowgreen"
+    }
+    return color
 }

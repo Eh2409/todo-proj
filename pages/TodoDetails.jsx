@@ -1,5 +1,7 @@
 import { todoService } from "../services/todo/todo.index.js"
 import { showErrorMsg } from "../services/event-bus.service.js"
+import { utilService } from "../services/util.service.js"
+
 
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
@@ -33,16 +35,26 @@ export function TodoDetails() {
 
     if (!todo) return <div>Loading...</div>
     return (
-        <section className="todo-details">
-            <h1 className={(todo.isDone) ? 'done' : ''}>{todo.txt}</h1>
-            <h2>{(todo.isDone) ? 'Done!' : 'In your list'}</h2>
+        <section className="todo-details" >
 
-            <h1>Todo importance: {todo.importance}</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim rem accusantium, itaque ut voluptates quo? Vitae animi maiores nisi, assumenda molestias odit provident quaerat accusamus, reprehenderit impedit, possimus est ad?</p>
-            <button onClick={onBack}>Back to list</button>
-            <div>
-                <Link to={`/todo/${todo.nextTodoId}`}>Next Todo</Link> |
-                <Link to={`/todo/${todo.prevTodoId}`}>Previous Todo</Link>
+            <div className="details-content" style={{ backgroundColor: todo.color }}>
+                <h1 className={(todo.isDone) ? 'done' : ''}>{todo.txt}</h1>
+                <h2>{(todo.isDone) ? <span className="done-state">👍Done!</span> : 'In your list'}</h2>
+
+                <h3>Todo importance:
+                    <span
+                        className="num"
+                        style={{ backgroundColor: utilService.setImportanceColor(todo.importance) }}>
+                        {todo.importance}
+                    </span>
+                </h3>
+                <p>{todo.description}</p>
+            </div>
+
+            <div className="details-nav">
+                <Link to={`/todo/${todo.prevTodoId}`} className="btn">Previous Todo</Link>
+                <button onClick={onBack}>Back to list</button>
+                <Link to={`/todo/${todo.nextTodoId}`} className="btn">Next Todo</Link>
             </div>
         </section>
     )
