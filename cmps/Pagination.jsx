@@ -13,7 +13,7 @@ export function Pagination({ maxPageCount, pageIdx, setPageIdx }) {
         if (currPage < maxPage - 1) btnsCount.add(currPage + 1)
 
         btnsCount = Array.from(btnsCount)
-        btnsCount = btnsCount.sort()
+        btnsCount = btnsCount.sort((n1, n2) => (n1 - n2) * 1)
 
         return btnsCount
     }
@@ -41,7 +41,7 @@ export function Pagination({ maxPageCount, pageIdx, setPageIdx }) {
             {maxPageCount > 0 &&
                 pages.map((pageNum, idx) => {
                     return <Fragment key={pageNum}>
-                        {isGap(pages, idx, pageNum) && <button className="gap">...</button>}
+                        {isGap(pages, idx, pageNum) && <button className="gap" disabled={true}>...</button>}
                         <button className={pageIdx === pageNum ? "active" : ""}
                             onClick={() => { onSetPageIdx(pageNum) }}>
                             {pageNum + 1}
