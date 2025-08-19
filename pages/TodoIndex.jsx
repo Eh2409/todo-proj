@@ -12,7 +12,7 @@ import { TodoSort } from "../cmps/todo/TodoSort.jsx"
 import { Pagination } from "../cmps/Pagination.jsx"
 import { utilService } from "../services/util.service.js"
 
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const { Link, useSearchParams } = ReactRouterDOM
 
 export function TodoIndex() {
@@ -31,10 +31,15 @@ export function TodoIndex() {
     const [todoIdToEdit, setTodoIdToEdit] = useState(null)
 
     const [isFirstRender, setIsFirstRender] = useState(true)
+    const [isFilterOpen, setIsFilterOpen] = useState(false)
+    const [activeFilterOptionsCount, setActiveFilterOptionsCount] = useState(0)
 
+    const filterRef = useRef()
+    const filterBtnRef = useRef()
 
     useEffect(() => {
         setSearchParams(utilService.cleanSearchParams(filterBy))
+        onCountActiveFilterOptions(filterBy)
         loadTodos(filterBy)
     }, [filterBy])
 
@@ -120,9 +125,46 @@ export function TodoIndex() {
 
     }
 
-
     function setPageIdx(pageNum) {
         setFilterBy(prevFilter => ({ ...prevFilter, pageIdx: pageNum }))
+    }
+
+    function toggleIsFilterOpen() {
+        setIsFilterOpen(!isFilterOpen)
+    }
+
+    ///
+
+    useEffect(() => {
+        if (isFilterOpen) {
+            addEventListener('mousedown', handleClickOutside)
+        } else {
+            removeEventListener('mousedown', handleClickOutside)
+        }
+
+        return (() => {
+            removeEventListener('mousedown', handleClickOutside)
+        })
+    }, [isFilterOpen])
+
+    function handleClickOutside({ target }) {
+        const elFilter = filterRef.current
+        const elFilterBtn = filterBtnRef.current
+        if (target !== elFilter && !elFilter.contains(target)) {
+            if (target === elFilterBtn || elFilterBtn.contains(target)) return
+            toggleIsFilterOpen()
+        }
+    }
+
+    function onCountActiveFilterOptions(filter) {
+
+        const count = Object.entries(filter).filter(([key, val]) => {
+            if (key === 'sortType' || key === 'dir' || key === 'pageIdx') return
+            if (key === 'isDone') return val !== undefined ? true : false
+            else return val
+        }).length
+
+        setActiveFilterOptionsCount(count)
     }
 
     const { txt, importance, isDone, sortType, dir, pageIdx } = filterBy
@@ -130,8 +172,29 @@ export function TodoIndex() {
     if (!todos) return <div>Loading...</div>
     return (
         <section className="todo-index">
-            <TodoFilter filterBy={{ txt, importance, isDone }} onSetFilterBy={onSetFilterBy} />
-            <TodoSort sortBy={{ sortType, dir }} onSetFilterBy={onSetFilterBy} />
+
+            <header className="todo-index-header">
+
+                <div className="todo-filter-wrapper">
+
+                    <button
+                        onClick={toggleIsFilterOpen}
+                        className={`filter-btn ${isFilterOpen ? "open" : ""}`}
+                        ref={filterBtnRef}
+                    >
+                        <span>Filter {activeFilterOptionsCount > 0 ? `(${activeFilterOptionsCount})` : ''}</span>
+                    </button>
+
+                    <TodoFilter
+                        filterBy={{ txt, importance, isDone }}
+                        onSetFilterBy={onSetFilterBy}
+                        isFilterOpen={isFilterOpen}
+                        filterRef={filterRef}
+                    />
+                </div>
+                <TodoSort sortBy={{ sortType, dir }} onSetFilterBy={onSetFilterBy} />
+
+            </header>
 
             <h2>Todos List</h2>
 

@@ -1,8 +1,10 @@
-const { useState, useEffect } = React
 
-export function TodoFilter({ filterBy, onSetFilterBy }) {
+const { useState, useEffect, useRef } = React
+
+export function TodoFilter({ filterBy, onSetFilterBy, isFilterOpen, filterRef }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
+    const resetFilterRef = useRef({ txt: '', importance: 0, isDone: undefined })
 
     useEffect(() => {
         // Notify parent
@@ -53,28 +55,33 @@ export function TodoFilter({ filterBy, onSetFilterBy }) {
         onSetFilterBy(filterByToEdit)
     }
 
+    function onReset() {
+        setFilterByToEdit(resetFilterRef.current)
+    }
+
     const { txt, importance, isDone } = filterByToEdit
     return (
-        <section className="todo-filter">
-            <h2>Filter Todos</h2>
-            <form onSubmit={onSubmitFilter}>
-                <input value={txt} onChange={handleChange}
-                    type="search" placeholder="By Txt" id="txt" name="txt"
-                />
-                <label htmlFor="importance">Importance: </label>
-                <input value={importance || ''} onChange={handleChange}
-                    type="number" placeholder="By Importance" id="importance" name="importance"
-                />
+        <section className={`todo-filter ${isFilterOpen ? "filter-open" : ""}`} ref={filterRef}>
+            <div>
+                <h2>Filter Todos</h2>
+                <form onSubmit={onSubmitFilter}>
+                    <input value={txt} onChange={handleChange}
+                        type="search" placeholder="By Txt" id="txt" name="txt"
+                    />
 
-                <label htmlFor="isDone">todo status: </label>
-                <select name="isDone" id="isDone" value={isDone} onChange={handleChange}>
-                    <option value="undefined">All</option>
-                    <option value="false">Active</option>
-                    <option value="true">Done</option>
-                </select>
+                    <input value={importance || ''} onChange={handleChange}
+                        type="number" placeholder="By Importance" id="importance" name="importance"
+                    />
 
-                <button hidden>Set Filter</button>
-            </form>
+                    <select name="isDone" id="isDone" value={isDone === undefined ? "undefined" : isDone} onChange={handleChange}>
+                        <option value="undefined">All</option>
+                        <option value="false">Active</option>
+                        <option value="true">Done</option>
+                    </select>
+
+                    <button type="button" className="reset-btn" onClick={onReset}>Reset</button>
+                </form>
+            </div>
         </section>
     )
 }

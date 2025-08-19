@@ -1,5 +1,53 @@
 .todo-filter {
+    background-color: var(--headerColor1);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.273);
     padding: 1em;
     margin: 1em 0;
-}
 
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+    border-radius: 10px;
+
+    display: grid;
+    grid-template-rows: 0fr;
+
+    width: max-content;
+
+    &>* {
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 300ms ease-in-out 300ms;
+    }
+
+    opacity: 0;
+    pointer-events: none;
+
+
+    transition: grid-template-rows 300ms ease-in-out,
+    opacity 100ms ease-in 200ms;
+
+    &.filter-open {
+        opacity: 1;
+        pointer-events: auto;
+        grid-template-rows: 1fr;
+
+
+        transition:
+            opacity 100ms ease-in,
+            grid-template-rows 300ms ease-in-out 100ms;
+
+        &>* {
+            opacity: 1;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1em;
+        align-items: center;
+    }
+
+}

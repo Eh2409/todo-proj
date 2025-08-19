@@ -9,20 +9,28 @@ button,
     border-radius: 4px;
 
     background-color: var(--headerColor1);
+    outline: var(--btnOutlineColor1) solid 1px;
 
     &:disabled {
         cursor: auto;
     }
 
+    /* &.reset-btn {}
+
+    &.filter-btn,
     &.close-btn,
     &.save-btn,
     &.mobile-nav-switch-btn,
     &.login-signup-btn {
         outline: var(--btnOutlineColor1) solid 1px;
-    }
+    } */
 
     &.login-signup-btn {
         min-width: 100px;
+    }
+
+    &.filter-btn {
+        border-radius: 100vh;
     }
 
     &.signup,
@@ -63,6 +71,7 @@ button,
         align-items: end;
         padding: 0.5em;
         border-radius: 50%;
+        background-color: inherit;
     }
 }
 
@@ -71,6 +80,7 @@ button:hover,
     transition: 0.3s;
 }
 
+select,
 input {
     outline: 1px solid var(--btnOutlineColor1);
     border-radius: 5px;
@@ -78,6 +88,9 @@ input {
     padding: 0.5em;
 }
 
+select {
+    width: 100%;
+}
 
 .input-color {
     -webkit-appearance: none;

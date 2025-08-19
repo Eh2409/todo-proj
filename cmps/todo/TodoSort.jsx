@@ -60,7 +60,7 @@ export function TodoSort({ sortBy, onSetFilterBy }) {
     }
 
     return (
-        <section>
+        <section className="todo-sort">
             <select className="btn" name="sort" id="sort" onChange={handleChange} value={selectValue}>
                 <option value="new">Date: New to Old</option>
                 <option value="old">Date: Old to New</option>

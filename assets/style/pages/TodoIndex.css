@@ -1,4 +1,51 @@
 .todo-index {
+    .todo-index-header {
+        display: flex;
+        justify-content: space-between;
+
+        .todo-sort {
+            &>* {
+
+                font-size: 1em;
+            }
+        }
+
+        .todo-filter-wrapper {
+            position: relative;
+
+            .filter-btn {
+                /* font-weight: bold; */
+                font-size: 1em;
+                overflow: hidden;
+
+                &::before {
+                    content: "x";
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    outline: 1px solid black;
+                    border-radius: 50%;
+                    width: 0px;
+                    aspect-ratio: 1/1;
+                    margin-inline: 0.1em;
+                    scale: 0;
+                    transition: 100ms ease-in-out;
+                }
+
+                &.open {
+
+                    &::before {
+                        scale: 1;
+                        width: 18px;
+                        margin-inline-end: 0.3em;
+                    }
+
+                }
+            }
+
+        }
+    }
+
     .todo-editor-wrapper {
         &.edit-mode {
             margin-block-end: 1em;
