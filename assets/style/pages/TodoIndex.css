@@ -14,9 +14,12 @@
             position: relative;
 
             .filter-btn {
-                /* font-weight: bold; */
                 font-size: 1em;
                 overflow: hidden;
+
+                span {
+                    white-space: nowrap;
+                }
 
                 &::before {
                     content: "x";
