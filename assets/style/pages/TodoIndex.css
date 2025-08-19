@@ -51,4 +51,11 @@
             margin-block-end: 1em;
         }
     }
+
+    .no-todo-found-msg {
+        padding: 1em;
+        font-size: 1em;
+        text-align: center;
+        justify-content: center;
+    }
 }

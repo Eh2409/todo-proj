@@ -14,11 +14,24 @@
         color: white;
         font-weight: bold;
 
+        &.loading {
+            tr {
+                th {
+                    padding: 10px;
+
+                    &.title-th {
+                        width: 75%;
+                    }
+                }
+            }
+        }
+
         tr {
             th {
                 padding-block: 10px;
             }
         }
+
     }
 
     tbody {

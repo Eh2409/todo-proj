@@ -7,11 +7,13 @@ export const REMOVE_TODO = 'REMOVE_TODO'
 export const SET_MAX_PAGE_COUNT = 'SET_MAX_PAGE_COUNT'
 
 export const SET_DONE_PERCENTAGE = 'SET_DONE_PERCENTAGE'
+export const IS_LOADING = 'IS_LOADING'
 
 const initialState = {
     todos: [],
     doneTodosPercentage: 0,
-    maxPageCount: 0
+    maxPageCount: 0,
+    isLoading: false
 }
 
 export function todoReducer(state = initialState, cmd) {
@@ -40,6 +42,9 @@ export function todoReducer(state = initialState, cmd) {
 
         case SET_MAX_PAGE_COUNT:
             return { ...state, maxPageCount: cmd.maxPageCount }
+
+        case IS_LOADING:
+            return { ...state, isLoading: cmd.isLoading }
 
         default: return state
     }

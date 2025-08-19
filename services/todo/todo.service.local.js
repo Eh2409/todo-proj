@@ -91,7 +91,7 @@ function includeDataFromServer(data = {}) {
 }
 
 function getMaxPage(filteredTodosLength) {
-    if (filteredTodosLength) return Promise.resolve(Math.ceil(filteredTodosLength / PAGE_SIZE))
+    if (filteredTodosLength || filteredTodosLength === 0) return Promise.resolve(Math.ceil(filteredTodosLength / PAGE_SIZE))
     return storageService.query(TODO_KEY)
         .then(todos => Math.ceil(todos.length / PAGE_SIZE))
         .catch(err => { throw err })

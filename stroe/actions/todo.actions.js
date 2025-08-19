@@ -1,6 +1,6 @@
 import { todoService } from "../../services/todo/todo.index.js";
 import { store } from "../store.js";
-import { ADD_TODO, REMOVE_TODO, SET_DONE_PERCENTAGE, SET_MAX_PAGE_COUNT, SET_TODOS, UPDATE_TODO } from "../reducers/todo.reducer.js";
+import { ADD_TODO, IS_LOADING, REMOVE_TODO, SET_DONE_PERCENTAGE, SET_MAX_PAGE_COUNT, SET_TODOS, UPDATE_TODO } from "../reducers/todo.reducer.js";
 import { userActions } from "./user.actions.js";
 
 export const todoActions = {
@@ -11,6 +11,9 @@ export const todoActions = {
 
 
 function loadTodos(filterBy = {}) {
+
+    store.dispatch({ type: IS_LOADING, isLoading: true })
+
     return todoService.query(filterBy)
         .then(({ todos, doneTodosPercentage, maxPageCount }) => {
             store.dispatch({ type: SET_TODOS, todos })
@@ -20,6 +23,9 @@ function loadTodos(filterBy = {}) {
         .catch(err => {
             console.log('todo action -> Cannot load todos', err)
             throw err
+        })
+        .finally(() => {
+            store.dispatch({ type: IS_LOADING, isLoading: false })
         })
 }
 

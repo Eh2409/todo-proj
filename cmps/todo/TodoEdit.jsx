@@ -1,5 +1,6 @@
 
 import { todoService } from "../../services/todo/todo.index.js"
+import { TodoLoader } from "./TodoLoader.jsx"
 
 const { useState, useEffect, Fragment } = React
 
@@ -52,7 +53,8 @@ export function TodoEdit({ toggleIsEditorOpen, saveTodo, todoIdToEdit, onSetTodo
 
     const { txt, description, importance, isDone, color } = todoToEdit
 
-    if (todoIdToEdit && !todoToEdit._id) return 'loading...'
+
+    if (todoIdToEdit && !todoToEdit._id) return <div colSpan="5" className="todo-load"></div>
     return (
         <section className="todo-edit" colSpan="5" style={{ backgroundColor: color }}>
 

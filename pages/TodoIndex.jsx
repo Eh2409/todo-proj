@@ -20,6 +20,10 @@ export function TodoIndex() {
     const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
     const todos = useSelector(storeState => storeState.todoModule.todos)
     const maxPageCount = useSelector(storeState => storeState.todoModule.maxPageCount)
+    const isLoading = useSelector(storeState => storeState.todoModule.isLoading)
+
+
+    console.log('maxPageCount:', maxPageCount)
 
     // Special hook for accessing search-params:
     const [searchParams, setSearchParams] = useSearchParams()
@@ -216,6 +220,7 @@ export function TodoIndex() {
                 onSetTodoIdToEdit={onSetTodoIdToEdit}
                 toggleIsEditorOpen={toggleIsEditorOpen}
                 saveTodo={saveTodo}
+                isLoading={isLoading}
             />
 
             <Pagination maxPageCount={maxPageCount} pageIdx={pageIdx} setPageIdx={setPageIdx} />
