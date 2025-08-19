@@ -33,7 +33,7 @@ export function TodoDetails() {
         // navigate(-1)
     }
 
-    if (!todo) return <div>Loading...</div>
+    if (!todo) return <div className="details-loader"></div>
     return (
         <section className="todo-details" >
 
