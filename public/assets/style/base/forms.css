@@ -67,6 +67,13 @@ button,
     &:hover:not(:disabled) {
         filter: drop-shadow(1px 1px 1px var(--btnOutlineColor1));
     }
+
+    &.get-start {
+        background-color: var(--signupBgClr);
+        color: white;
+        border-radius: 100vh;
+        margin: 0;
+    }
 }
 
 button:hover,

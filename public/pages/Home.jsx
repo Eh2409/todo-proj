@@ -1,16 +1,23 @@
-import { ToggleButton } from "../cmps/ToggleButton.jsx"
-
-const { useState } = React
+const { NavLink } = ReactRouterDOM
 
 export function Home() {
-    
-    const [isOn, setIsOn] = useState(false)
 
     return (
         <section className="home">
-            <h1>Todo's R Us!</h1>
-            <ToggleButton val={isOn} setVal={setIsOn} />
-            {isOn && <img src="../assets/img/todo.png" alt="" />}
+            <div className="home-content">
+                <div className="home-title">
+                    Your life, <span>organized.</span>
+                </div>
+                <p className="">
+                    Todo app is a simple yet powerful to-do app designed to help you focus, get things done, and feel in control of your day.
+                </p>
+
+                <NavLink to="/todo" className='btn get-start'>
+                    Get Started
+                </NavLink>
+
+            </div>
         </section>
     )
+
 }

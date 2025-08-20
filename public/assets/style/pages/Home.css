@@ -1,7 +1,58 @@
-
 .home {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    text-align: center;
+
+    min-height: 80vh;
+    margin: auto;
+
+    .home-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+
+        text-align: center;
+
+
+        max-width: 80vw;
+        padding-inline: 1.5em;
+
+        .home-title {
+            font-size: 4em;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+
+            span {
+                color: blue;
+            }
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .get-start {
+            font-size: 1.5em;
+        }
+    }
+}
+
+
+@media (min-width: 750px) {
+    .home {
+        min-height: 80vh;
+
+        .home-content {
+
+            p {
+                font-size: 1.5em;
+            }
+        }
+    }
 }
