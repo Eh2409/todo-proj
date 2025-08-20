@@ -6,6 +6,7 @@ import { todoService } from './services/todo.service.js'
 import { loggerService } from './services/logger.service.js'
 import { setBoolean } from './services/util.servics.js'
 import { userService } from './services/user.service.js'
+import { authService } from './services/auth.service.js'
 
 const app = express()
 
@@ -126,7 +127,7 @@ app.get('/api/user', (req, res) => {
 })
 
 app.put('/api/user/:userId', (req, res) => {
-    // const loggedinUser = authService.validateToken(req.cookies.loginToken)
+    const loggedinUser = authService.validateToken(req.cookies.loginToken)
 
     const { body: userToUpdate } = req
     const { _id, fullname, balance, prefs, activity } = userToUpdate
@@ -135,9 +136,9 @@ app.put('/api/user/:userId', (req, res) => {
         return res.status(400).send('Required fields are missing')
     }
 
-    // if (!loggedinUser || loggedinUser._id !== _id && !loggedinUser.isAdmin) {
-    //     return res.status(400).send('Not authorized to update user')
-    // }
+    if (!loggedinUser || loggedinUser._id !== _id && !loggedinUser.isAdmin) {
+        return res.status(400).send('Not authorized to update user')
+    }
 
     const userToSave = { _id, fullname, balance, prefs, activity }
 
@@ -150,12 +151,12 @@ app.put('/api/user/:userId', (req, res) => {
 })
 
 app.delete('/api/user/:userId', (req, res) => {
-    // const loggedinUser = authService.validateToken(req.cookies.loginToken)
+    const loggedinUser = authService.validateToken(req.cookies.loginToken)
     const { userId } = req.params
 
-    // if (!loggedinUser || !loggedinUser.isAdmin) {
-    //     return res.status(400).send('Not authorized to remove user')
-    // }
+    if (!loggedinUser || !loggedinUser.isAdmin) {
+        return res.status(400).send('Not authorized to remove user')
+    }
 
     userService.remove(userId)
         .then(() => res.send(`user ${userId} removed`))
@@ -175,6 +176,60 @@ app.get('/api/user/:userId', (req, res) => {
             loggerService.error(err)
             res.status(400).send(err)
         })
+})
+
+/// auth
+
+
+app.post('/api/auth/login', (req, res) => {
+    const credentials = req.body
+    const { username, password } = credentials
+
+    if (!username || !password) {
+        return res.status(400).send('Missing required credentials')
+    }
+
+    authService.login({ username, password })
+        .then(user => {
+            const loginToken = authService.getLoginToken(user)
+            res.cookie('loginToken', loginToken)
+            res.send(user)
+        })
+        .catch(err => {
+            loggerService.error(err)
+            res.status(400).send(err)
+        })
+})
+
+app.post('/api/auth/signup', (req, res) => {
+    const credentials = req.body
+
+    const { username, password, fullname } = credentials
+
+    if (!username || !password || !fullname) {
+        return res.status(400).send('Missing required credentials')
+    }
+
+    userService.add(credentials)
+        .then(user => {
+
+            if (user) {
+                const loginToken = authService.getLoginToken(user)
+                res.cookie('loginToken', loginToken)
+                res.send(user)
+            } else {
+                res.status(400).send('Cannot Signup')
+            }
+        })
+        .catch(err => {
+            loggerService.error(err)
+            res.status(400).send(err)
+        })
+})
+
+app.post('/api/auth/logout', (req, res) => {
+    res.clearCookie('loginToken')
+    res.send('user logged out!')
 })
 
 

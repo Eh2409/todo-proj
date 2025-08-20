@@ -1,5 +1,20 @@
 [
   {
+    "_id": "50f19O",
+    "username": "dfgdfgdfgdfgfdgfdg",
+    "password": "435435435435",
+    "fullname": "Danny Dahan",
+    "isAdmin": false,
+    "createdAt": 1755650225907,
+    "updatedAt": 1755650225907,
+    "balance": 1000,
+    "activities": [],
+    "prefs": {
+      "color": "",
+      "bgColor": ""
+    }
+  },
+  {
     "_id": "u101",
     "username": "ashk",
     "password": "p@ss123",
