@@ -1,9 +1,24 @@
 .main-layout {
     display: grid;
     grid-template-columns: 1.6rem 1fr 1.6rem;
+
+    .app-header {
+        height: 12vh;
+    }
+
+    .app-main-content {
+        min-height: calc(100vh - 12vh);
+
+        padding-block-start: 1em;
+
+        &:has(.home) {
+            grid-column: 1/-1;
+            padding-block-start: 0em;
+        }
+    }
 }
 
-.main-layout > * {
+.main-layout>* {
     grid-column: 2;
 }
 

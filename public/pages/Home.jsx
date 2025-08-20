@@ -3,7 +3,7 @@ const { NavLink } = ReactRouterDOM
 export function Home() {
 
     return (
-        <section className="home">
+        <section className="full home">
             <div className="home-content">
                 <div className="home-title">
                     Your life, <span>organized.</span>

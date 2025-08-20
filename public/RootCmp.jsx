@@ -34,7 +34,7 @@ export function RootCmp() {
             <Router>
                 <section className="app main-layout">
                     <AppHeader />
-                    <main>
+                    <main className="app-main-content">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />}>
