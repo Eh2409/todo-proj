@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import { todoService } from './services/todo.service.js'
 import { loggerService } from './services/logger.service.js'
 import { setBoolean } from './services/util.servics.js'
+import { userService } from './services/user.service.js'
 
 const app = express()
 
@@ -106,6 +107,70 @@ app.get('/api/todo/:todoId', (req, res) => {
 
     todoService.getById(todoId)
         .then(todo => res.send(todo))
+        .catch(err => {
+            loggerService.error(err)
+            res.status(400).send(err)
+        })
+})
+
+// user
+
+app.get('/api/user', (req, res) => {
+
+    userService.query()
+        .then(users => res.send(users))
+        .catch(err => {
+            loggerService.error(err)
+            res.status(400).send(err)
+        })
+})
+
+app.put('/api/user/:userId', (req, res) => {
+    // const loggedinUser = authService.validateToken(req.cookies.loginToken)
+
+    const { body: userToUpdate } = req
+    const { _id, fullname, balance, prefs, activity } = userToUpdate
+
+    if (!_id) {
+        return res.status(400).send('Required fields are missing')
+    }
+
+    // if (!loggedinUser || loggedinUser._id !== _id && !loggedinUser.isAdmin) {
+    //     return res.status(400).send('Not authorized to update user')
+    // }
+
+    const userToSave = { _id, fullname, balance, prefs, activity }
+
+    userService.update(userToSave)
+        .then(savedUser => res.send(savedUser))
+        .catch(err => {
+            loggerService.error(err)
+            res.status(400).send(err)
+        })
+})
+
+app.delete('/api/user/:userId', (req, res) => {
+    // const loggedinUser = authService.validateToken(req.cookies.loginToken)
+    const { userId } = req.params
+
+    // if (!loggedinUser || !loggedinUser.isAdmin) {
+    //     return res.status(400).send('Not authorized to remove user')
+    // }
+
+    userService.remove(userId)
+        .then(() => res.send(`user ${userId} removed`))
+        .catch(err => {
+            loggerService.error(err)
+            res.status(400).send(err)
+        })
+
+})
+
+app.get('/api/user/:userId', (req, res) => {
+    const { userId } = req.params
+
+    userService.getById(userId)
+        .then(user => res.send(user))
         .catch(err => {
             loggerService.error(err)
             res.status(400).send(err)

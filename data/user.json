@@ -1,0 +1,152 @@
+[
+  {
+    "_id": "u101",
+    "username": "ashk",
+    "password": "p@ss123",
+    "fullname": "dfsdfs",
+    "createdAt": 1724100000000,
+    "updatedAt": 1755649735650,
+    "balance": 1200,
+    "activities": [],
+    "prefs": {
+      "color": "#435",
+      "bgColor": "#43545"
+    },
+    "isAdmin": false
+  },
+  {
+    "_id": "u102",
+    "username": "misty",
+    "password": "water789",
+    "fullname": "Misty Waterflower",
+    "createdAt": 1724200000000,
+    "updatedAt": 1724200000000,
+    "balance": 1000,
+    "activities": [],
+    "prefs": {
+      "color": "#0099ff",
+      "bgColor": "#f0faff"
+    },
+    "isAdmin": false
+  },
+  {
+    "_id": "u103",
+    "username": "brock",
+    "password": "rock456",
+    "fullname": "Brock Stone",
+    "createdAt": 1724300000000,
+    "updatedAt": 1724300000000,
+    "balance": 1000,
+    "activities": [],
+    "prefs": {
+      "color": "#663300",
+      "bgColor": "#faf5f0"
+    },
+    "isAdmin": false
+  },
+  {
+    "_id": "u104",
+    "username": "gary",
+    "password": "oak321",
+    "fullname": "Gary Oak",
+    "createdAt": 1724400000000,
+    "updatedAt": 1724400000000,
+    "balance": 1000,
+    "activities": [],
+    "prefs": {
+      "color": "#006600",
+      "bgColor": "#f0fff0"
+    },
+    "isAdmin": false
+  },
+  {
+    "_id": "u105",
+    "username": "serena",
+    "password": "xy123",
+    "fullname": "Serena Grace",
+    "createdAt": 1724500000000,
+    "updatedAt": 1724500000000,
+    "balance": 1000,
+    "activities": [],
+    "prefs": {
+      "color": "#ff66cc",
+      "bgColor": "#fff0fa"
+    },
+    "isAdmin": false
+  },
+  {
+    "_id": "u106",
+    "username": "may",
+    "password": "hoenn555",
+    "fullname": "May Maple",
+    "createdAt": 1724600000000,
+    "updatedAt": 1724600000000,
+    "balance": 1000,
+    "activities": [],
+    "prefs": {
+      "color": "#ff6600",
+      "bgColor": "#fff5f0"
+    },
+    "isAdmin": false
+  },
+  {
+    "_id": "u107",
+    "username": "dawn",
+    "password": "sinnoh888",
+    "fullname": "Dawn Berlitz",
+    "createdAt": 1724700000000,
+    "updatedAt": 1724700000000,
+    "balance": 1000,
+    "activities": [],
+    "prefs": {
+      "color": "#3399ff",
+      "bgColor": "#f0f8ff"
+    },
+    "isAdmin": false
+  },
+  {
+    "_id": "u108",
+    "username": "cynthia",
+    "password": "champ999",
+    "fullname": "Cynthia Shirona",
+    "createdAt": 1724800000000,
+    "updatedAt": 1724800000000,
+    "balance": 1000,
+    "activities": [],
+    "prefs": {
+      "color": "#000000",
+      "bgColor": "#f9f9f9"
+    },
+    "isAdmin": false
+  },
+  {
+    "_id": "u109",
+    "username": "leon",
+    "password": "galar111",
+    "fullname": "Leon Crown",
+    "createdAt": 1724900000000,
+    "updatedAt": 1724900000000,
+    "balance": 1000,
+    "activities": [],
+    "prefs": {
+      "color": "#800080",
+      "bgColor": "#f8f0ff"
+    },
+    "isAdmin": false
+  },
+  {
+    "_id": "u110",
+    "username": "red",
+    "password": "legend777",
+    "fullname": "Red Trainer",
+    "createdAt": 1725000000000,
+    "updatedAt": 1725000000000,
+    "balance": 1000,
+    "activities": [],
+    "prefs": {
+      "color": "#cc0000",
+      "bgColor": "#fff5f5"
+    },
+    "isAdmin": false
+  }
+]
