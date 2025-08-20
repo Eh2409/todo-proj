@@ -1,31 +1,135 @@
 [
   {
-    "_id": "50f19O",
-    "username": "dfgdfgdfgdfgfdgfdg",
-    "password": "435435435435",
-    "fullname": "Danny Dahan",
+    "_id": "6M6FzV",
+    "username": "435",
+    "password": "muki1",
+    "fullname": "4435",
     "isAdmin": false,
-    "createdAt": 1755650225907,
-    "updatedAt": 1755650225907,
+    "createdAt": 1755654631826,
+    "updatedAt": 1755654738612,
     "balance": 1000,
     "activities": [],
     "prefs": {
-      "color": "",
+      "color": "#000000",
       "bgColor": ""
+    }
+  },
+  {
+    "_id": "Cmz8j0",
+    "username": "muki",
+    "password": "muki1",
+    "fullname": "zevl",
+    "isAdmin": false,
+    "createdAt": 1755651132130,
+    "updatedAt": 1755654547062,
+    "balance": 1080,
+    "activities": [
+      {
+        "txt": "Updated todo Write blog post",
+        "at": 1755654513665
+      },
+      {
+        "txt": "Updated todo Go for a walk",
+        "at": 1755654513202
+      },
+      {
+        "txt": "Updated todo Buy groceries",
+        "at": 1755654511709
+      },
+      {
+        "txt": "Updated todo Finish React project",
+        "at": 1755654511144
+      },
+      {
+        "txt": "Updated todo Call mom",
+        "at": 1755654510674
+      },
+      {
+        "txt": "Updated todo Read a book",
+        "at": 1755652767313
+      },
+      {
+        "txt": "Updated todo Pay electricity bill",
+        "at": 1755652766208
+      },
+      {
+        "txt": "Updated todo Clean the kitchen",
+        "at": 1755652765611
+      },
+      {
+        "txt": "Updated todo Call mom",
+        "at": 1755652759026
+      },
+      {
+        "txt": "Updated todo Clean the kitchen",
+        "at": 1755652758247
+      },
+      {
+        "txt": "Updated todo Pay electricity bill",
+        "at": 1755652757447
+      },
+      {
+        "txt": "Updated todo Pay electricity bill",
+        "at": 1755652756101
+      },
+      {
+        "txt": "Updated todo Clean the kitchen",
+        "at": 1755652755375
+      },
+      {
+        "txt": "Updated todo Clean the kitchen",
+        "at": 1755652755375
+      },
+      {
+        "txt": "Updated todo Call mom",
+        "at": 1755652754854
+      },
+      {
+        "txt": "Updated todo Finish React project",
+        "at": 1755652753376
+      },
+      {
+        "txt": "Updated todo Finish React project",
+        "at": 1755652751695
+      },
+      {
+        "txt": "Updated todo Finish React project",
+        "at": 1755652749997
+      },
+      {
+        "txt": "Updated todo Finish React project",
+        "at": 1755651510485
+      },
+      {
+        "txt": "Updated todo Clean the kitchen",
+        "at": 1755651310536
+      },
+      {
+        "txt": "Updated todo Call mom",
+        "at": 1755651196286
+      },
+      {
+        "txt": "Updated todo Clean the kitchen",
+        "at": 1755651162981
+      }
+    ],
+    "prefs": {
+      "color": "#f20202",
+      "bgColor": "#f96c6c"
     }
   },
   {
     "_id": "u101",
     "username": "ashk",
     "password": "p@ss123",
-    "fullname": "dfsdfs",
+    "fullname": "Ash Ketchum",
     "createdAt": 1724100000000,
-    "updatedAt": 1755649735650,
-    "balance": 1200,
+    "updatedAt": 1724100000000,
+    "balance": 1000,
     "activities": [],
     "prefs": {
-      "color": "#435",
-      "bgColor": "#43545"
+      "color": "#ff0000",
+      "bgColor": "#fff0f0"
     },
     "isAdmin": false
   },

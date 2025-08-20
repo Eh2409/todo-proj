@@ -8,6 +8,7 @@ import { setBoolean } from './services/util.servics.js'
 import { userService } from './services/user.service.js'
 import { authService } from './services/auth.service.js'
 
+
 const app = express()
 
 app.set('query parser', 'extended')
@@ -19,8 +20,6 @@ app.use(cookieParser())
 // todos
 
 app.get('/api/todo', (req, res) => {
-
-    console.log(!!req.query.isDone);
 
     const filterBy = {
         txt: req.query.txt || '',

@@ -17,7 +17,6 @@ const { Link, useSearchParams } = ReactRouterDOM
 
 export function TodoIndex() {
 
-    const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
     const todos = useSelector(storeState => storeState.todoModule.todos)
     const maxPageCount = useSelector(storeState => storeState.todoModule.maxPageCount)
     const isLoading = useSelector(storeState => storeState.todoModule.isLoading)
@@ -74,7 +73,6 @@ export function TodoIndex() {
         todoActions.save(todoToSave)
             .then(() => {
                 showSuccessMsg(`Todo is ${(todoToSave.isDone) ? 'done' : 'back on your list'}`)
-                if (loggedinUser && todoToSave.isDone) updateBalance()
             })
             .catch(err => {
                 console.log('err:', err)
@@ -82,14 +80,7 @@ export function TodoIndex() {
             })
     }
 
-    function updateBalance() {
-        const userToUpdate = { _id: loggedinUser._id, balance: loggedinUser.balance + 10 }
-        userActions.update(userToUpdate)
-            .catch(err => {
-                console.log('err:', err)
-                showErrorMsg('Cannot update user ')
-            })
-    }
+
 
     function toggleIsEditorOpen() {
         setIsEditorOpen(!isEditorOpen)

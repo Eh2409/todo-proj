@@ -33,11 +33,15 @@ function update(userToUpdate) {
         })
 }
 
-function addActivity(activity) {
+function addActivity(activity, isBalanceUpdateNeeded = false) {
     const user = userService.getLoggedinUser()
     if (!user) return
 
     const userToUpdate = { _id: user._id, activity }
+
+    if (isBalanceUpdateNeeded) {
+        userToUpdate.balance = user.balance + 10
+    }
 
     return userService.update(userToUpdate)
         .then(user => {

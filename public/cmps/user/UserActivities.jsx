@@ -9,8 +9,8 @@ export function UserActivities() {
             <h3>Activities</h3>
 
             {loggedinUser.activities.length > 0 ? <ul>
-                {loggedinUser.activities.map(a => {
-                    return < li key={a.at}>
+                {loggedinUser.activities.map((a, idx) => {
+                    return < li key={a.at + idx}>
                         <span>{utilService.formatTimeAgo(a.at)}</span>
                         <span>{a.txt}</span>
                     </li>

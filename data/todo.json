@@ -4,20 +4,20 @@
     "txt": "Buy groceries",
     "description": "Milk, eggs, vegetables",
     "importance": 4,
-    "isDone": true,
+    "isDone": false,
     "color": null,
     "createdAt": 1755573620,
-    "updatedAt": 1755631220
+    "updatedAt": 1755654511701
   },
   {
     "_id": "101t",
     "txt": "Finish React project",
     "description": "Complete components and routing",
     "importance": 1,
-    "isDone": true,
+    "isDone": false,
     "color": null,
     "createdAt": 1755533000,
-    "updatedAt": 1755605000
+    "updatedAt": 1755654511122
   },
   {
     "_id": "102t",
@@ -27,7 +27,7 @@
     "isDone": false,
     "color": null,
     "createdAt": 1755391340,
-    "updatedAt": 1755499340
+    "updatedAt": 1755654510665
   },
   {
     "_id": "103t",
@@ -37,17 +37,17 @@
     "isDone": false,
     "color": null,
     "createdAt": 1755324680,
-    "updatedAt": 1755414680
+    "updatedAt": 1755652765602
   },
   {
     "_id": "104t",
     "txt": "Pay electricity bill",
     "description": "",
     "importance": 3,
-    "isDone": true,
+    "isDone": false,
     "color": null,
     "createdAt": 1755268700,
-    "updatedAt": 1755416300
+    "updatedAt": 1755652766200
   },
   {
     "_id": "105t",
@@ -57,27 +57,27 @@
     "isDone": false,
     "color": null,
     "createdAt": 1755117260,
-    "updatedAt": 1755167660
+    "updatedAt": 1755652767304
   },
   {
     "_id": "106t",
     "txt": "Go for a walk",
     "description": "Evening walk in the park",
     "importance": 4,
-    "isDone": true,
+    "isDone": false,
     "color": null,
     "createdAt": 1755037160,
-    "updatedAt": 1755199160
+    "updatedAt": 1755654513197
   },
   {
     "_id": "107t",
     "txt": "Write blog post",
     "description": "Draft about learning JavaScript",
     "importance": 4,
-    "isDone": true,
+    "isDone": false,
     "color": null,
     "createdAt": 1754943500,
-    "updatedAt": 1754965100
+    "updatedAt": 1755654513659
   },
   {
     "_id": "108t",

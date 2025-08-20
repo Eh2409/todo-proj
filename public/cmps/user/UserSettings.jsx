@@ -64,10 +64,10 @@ export function UserSettings() {
                 <input type="text" name="fullname" id="fullname" value={fullname} onChange={handleChange} />
 
                 <label htmlFor="color">Color:</label>
-                <input type="color" name="color" id="color" className="input-color" value={color} onChange={handleChange} />
+                <input type="color" name="color" id="color" className="input-color" value={color || '#000000'} onChange={handleChange} />
 
                 <label htmlFor="bgColor">Background Color:</label>
-                <input type="color" name="bgColor" id="bgColor" className="input-color" value={bgColor} onChange={handleChange} />
+                <input type="color" name="bgColor" id="bgColor" className="input-color" value={bgColor || '#000000'} onChange={handleChange} />
 
                 <button disabled={isDisabled()} className="save-btn">Save</button>
             </form>

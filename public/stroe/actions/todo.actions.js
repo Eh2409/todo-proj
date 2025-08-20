@@ -48,6 +48,7 @@ function remove(todoId) {
 
 function save(todoToSave) {
     const method = todoToSave._id ? "update" : "add"
+    const isBalanceUpdateNeeded = todoToSave.isDone
 
     return todoService.save(todoToSave)
         .then(({ todo, doneTodosPercentage, maxPageCount }) => {
@@ -61,8 +62,10 @@ function save(todoToSave) {
             store.dispatch({ type: SET_DONE_PERCENTAGE, doneTodosPercentage })
             store.dispatch({ type: SET_MAX_PAGE_COUNT, maxPageCount })
 
+
             const activity = { txt: `${method === 'update' ? "Updated" : "Added"} todo ${todoToSave.txt}`, at: Date.now() }
-            userActions.addActivity(activity)
+            userActions.addActivity(activity, isBalanceUpdateNeeded)
+
 
             return todo._id
         })
