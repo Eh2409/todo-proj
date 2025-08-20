@@ -10,6 +10,7 @@
 
 /* Pages */
 @import "pages/Home.css";
+@import "pages/About.css";
 @import "pages/TodoDetails.css";
 @import "pages/UserDetails.css";
 @import "pages/TodoIndex.css";
